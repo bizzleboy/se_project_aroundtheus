@@ -1,0 +1,19 @@
+.header {
+  max-width: 1600px;
+  min-width: 1100px;
+  margin: 0 auto;
+}
+
+.header__logo {
+  width: 173px;
+  height: 33px;
+  margin: 45px 907px 41px 200px;
+}
+
+.header__divider {
+  width: 880px;
+  height: 0px;
+  opacity: 0.7;
+  border: 1px solid #545454;
+  margin: 0 200px 36.25px 200px;
+}
