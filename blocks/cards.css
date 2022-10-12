@@ -1,7 +1,17 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 282px);
-  grid-template-rows: repeat(3, 361px);
+  grid-template-rows: repeat(2, 361px);
   gap: 17px 20px;
   margin-top: 51px;
+}
+
+@media screen and (max-width: 768px) and (min-width: 360px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(1, 282px);
+    grid-template-rows: repeat(6, 361px);
+    row-gap: 20px;
+    justify-content: center;
+  }
 }
