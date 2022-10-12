@@ -3,4 +3,70 @@
   height: 361px;
   background-color: white;
   border-radius: 25px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.yosemite {
+  background-image: url("../images/yosemite-valley-1.jpg");
+  background-size: 100% 78%;
+  background-repeat: no-repeat;
+}
+
+.louise {
+  background-image: url("../images/lake-louise.png");
+  background-size: 100% 78%;
+  background-repeat: no-repeat;
+}
+
+.bald {
+  background-image: url("../images/bald-mountains.png");
+  background-size: 100% 78%;
+  background-repeat: no-repeat;
+}
+
+.latemar {
+  background-image: url("../images/latemar.png");
+  background-size: 100% 78%;
+  background-repeat: no-repeat;
+}
+
+.vanoise {
+  background-image: url("../images/vanoise-national-park-1.png");
+  background-size: 100% 78%;
+  background-repeat: no-repeat;
+}
+
+.braies {
+  background-image: url("../images/lago-di-braies.png");
+  background-size: 100% 78%;
+  background-repeat: no-repeat;
+}
+
+.card__text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+
+  margin-left: 20px;
+
+  margin-bottom: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__like {
+  margin-bottom: 30px;
+  margin-right: 30px;
+  margin-left: 28px;
+  background-image: url("../images/heart.svg");
+  width: 21px;
+  height: 18px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-style: none;
+  background-color: white;
 }

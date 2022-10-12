@@ -1,14 +1,27 @@
 .profile {
   display: flex;
+  margin-top: 40px;
 }
 .profile__picture {
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  margin-right: 30px;
 }
 
 .profile__text {
+  justify-content: center;
   display: flex;
+  flex-direction: column;
+
+  flex-wrap: wrap;
+}
+
+.profile__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
 }
 .profile__name {
   font-family: "Inter";
@@ -32,7 +45,6 @@
   height: 18px;
 
   margin: 0;
-  flex-wrap: wrap;
 }
 
 .profile__edit {
