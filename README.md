@@ -14,6 +14,7 @@ The layout adapts accordingly and was made possible via media queries.
 **Figma**
 
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Link to Project on GitHub Pages](https://bizzleboy.github.io/se_project_aroundtheus/)
 
 **GIF tech demo**
 ![](https://github.com/bizzleboy/se_project_aroundtheus/blob/main/aroundgif.gif)
