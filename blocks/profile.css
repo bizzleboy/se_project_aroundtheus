@@ -118,7 +118,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 22px;
-    line-height: 27px;
+    line-height: 1.2;
   }
 
   .profile__subtitle {
@@ -126,7 +126,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 1.21;
     text-align: center;
   }
 
@@ -158,7 +158,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 33px;
-    line-height: 48px;
+    line-height: 1.45;
   }
 
   .profile__subtitle {
@@ -166,6 +166,6 @@
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
-    line-height: 22px;
+    line-height: 1.47;
   }
 }
