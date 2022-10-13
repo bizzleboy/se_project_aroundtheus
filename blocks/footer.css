@@ -1,6 +1,7 @@
 .footer {
   background-color: black;
   max-width: 880px;
+  align-self: stretch;
 }
 
 .footer__copyright {
@@ -9,7 +10,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
-  margin: 67px 0 0 0;
+  margin: 67px 0 0 17vh;
 
   color: #545454;
 }
