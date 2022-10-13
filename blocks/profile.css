@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   margin-top: 40px;
+  margin-bottom: 51px;
 }
 .profile__picture {
   width: 120px;
@@ -22,6 +23,7 @@
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 16px;
+  margin-right: 161px;
 }
 .profile__name {
   font-family: "Inter";
@@ -70,14 +72,18 @@
 .profile__add {
   background-image: url("../images/Add\ Button.svg");
   background-repeat: no-repeat;
-  width: 150px;
-  height: 50px;
+  background-size: 22px 22px;
+  width: 22px;
+  height: 22px;
   align-self: center;
-  margin-left: 165px;
   transition-timing-function: ease-in;
   transition-duration: 0.1s;
   background-color: black;
-  border-style: none;
+
+  border: 1px solid white;
+  padding: 25px 75px 25px 75px;
+  background-position: center;
+  border-radius: 5px;
 }
 
 .profile__add:hover {
@@ -89,6 +95,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 39px;
+    margin-bottom: 0;
     max-width: 768px;
     min-width: 360px;
 
@@ -103,6 +110,8 @@
   .profile__title {
     margin-bottom: 14px;
     margin-top: 30px;
+    text-align: center;
+    margin-right: 0;
   }
   .profile__name {
     font-family: "Inter";
@@ -129,5 +138,10 @@
   }
   .profile__add {
     margin: 36px 0 36px 0;
+    background-image: url("../images/Add\ Button.svg");
+    background-repeat: no-repeat;
+    width: 282px;
+    height: 50px;
+    object-fit: cover;
   }
 }
