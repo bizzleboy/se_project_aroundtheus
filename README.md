@@ -8,7 +8,7 @@
 
 **Description**
 
-I developed a pesudo-social media page that is responsive on all modern day device sizes from phones to TV screens.
+I developed a pseudo-social media page that is responsive on all modern day device sizes from phones to TV screens.
 The layout adapts accordingly and was made possible via media queries.
 
 **Figma**
