@@ -1,7 +1,7 @@
 .footer {
   background-color: black;
   max-width: 880px;
-  align-self: stretch;
+  margin: 0 auto;
 }
 
 .footer__copyright {
@@ -10,9 +10,10 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
-  margin: 67px 0 0 17vh;
+  margin-top: 67px;
 
   color: #545454;
+  margin-bottom: 0;
 }
 
 @media screen and (min-width: 360px) and (max-width: 768px) {
