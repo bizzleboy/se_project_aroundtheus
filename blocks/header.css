@@ -23,6 +23,7 @@
     background-color: black;
     max-width: 768px;
     min-width: 320px;
+    width: 90%;
   }
 
   .header__logo {
@@ -31,7 +32,7 @@
   }
 
   .header__divider {
-    width: 320px;
+    width: 90vh;
   }
 }
 
