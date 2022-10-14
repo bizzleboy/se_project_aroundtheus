@@ -3,6 +3,8 @@
   margin: 0 auto;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   padding-bottom: 41px;
+  max-width: 880px;
+  min-width: 369px;
 }
 
 .header__logo {
@@ -14,8 +16,8 @@
 @media screen and (max-width: 930px) {
   .header {
     background-color: black;
-    max-width: 930px;
-    min-width: 769px;
+    max-width: 530px;
+    min-width: 369px;
   }
 
   .header__logo {
@@ -27,8 +29,8 @@
 @media screen and (max-width: 768px) {
   .header {
     background-color: black;
-    max-width: 768px;
-    min-width: 320px;
+    max-width: 320px;
+    min-width: 0;
 
     padding-bottom: 32px;
   }

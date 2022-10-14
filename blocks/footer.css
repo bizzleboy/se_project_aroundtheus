@@ -20,11 +20,14 @@
 
 @media screen and (max-width: 929px) {
   .footer {
-    max-width: 929px;
+    max-width: 529px;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .footer {
+    max-width: 290px;
+  }
   .footer__copyright {
     margin-top: 48px;
   }

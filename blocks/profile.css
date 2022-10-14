@@ -102,6 +102,11 @@
 }
 
 @media screen and (max-width: 929px) {
+  .profile {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .profile__add {
     margin-left: auto;
     margin-right: auto;
