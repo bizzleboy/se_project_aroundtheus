@@ -2,6 +2,13 @@
   display: flex;
   margin-top: 40px;
   margin-bottom: 51px;
+  font-family: "Inter", Arial, sans-serif;
+  justify-content: space-between;
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: row;
 }
 .profile__picture {
   width: 120px;
@@ -23,10 +30,9 @@
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 16px;
-  margin-right: 165px;
+  margin-left: auto;
 }
 .profile__name {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
@@ -34,19 +40,23 @@
 
   color: #ffffff;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__subtitle {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 1.2;
 
   color: #ffffff;
-  height: 18px;
 
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit {
@@ -57,12 +67,13 @@
   border: 1px solid white;
   background-image: url("../images/pencil.svg");
   background-repeat: no-repeat;
-  background-color: black;
+  background-color: transparent;
   background-position: center;
   margin-left: 18px;
   margin-top: 5px;
   transition-timing-function: ease-in;
   transition-duration: 0.1s;
+  cursor: pointer;
 }
 
 .profile__edit:hover {
@@ -78,27 +89,49 @@
   align-self: center;
   transition-timing-function: ease-in;
   transition-duration: 0.1s;
-  background-color: black;
-
-  border: 1px solid white;
+  background-color: transparent;
+  border: 2px solid white;
   padding: 25px 75px 25px 75px;
   background-position: center;
-  border-radius: 5px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 .profile__add:hover {
   opacity: 0.6;
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px) {
+@media screen and (max-width: 929px) {
+  .profile__add {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .profile__name {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 33px;
+    line-height: 1.45;
+  }
+
+  .profile__subtitle {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.47;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .profile {
-    display: flex;
     flex-direction: column;
     margin-top: 39px;
     margin-bottom: 0;
-    max-width: 768px;
-    min-width: 360px;
 
+    align-items: center;
+  }
+
+  .profile__info {
+    flex-direction: column;
     align-items: center;
   }
 
@@ -114,17 +147,12 @@
     margin-right: 0;
   }
   .profile__name {
-    font-family: "Inter-Medium";
-    font-style: normal;
     font-weight: 500;
     font-size: 22px;
     line-height: 1.2;
   }
 
   .profile__subtitle {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
     font-size: 14px;
     line-height: 1.21;
     text-align: center;
@@ -134,38 +162,10 @@
     width: 8px;
     height: 8px;
     padding: 9px;
-    background-image: url("../images/pencil.svg");
   }
   .profile__add {
     margin: 36px 0 36px 0;
-    background-image: url("../images/Add\ Button.svg");
-    background-repeat: no-repeat;
     width: 282px;
     height: 50px;
-    object-fit: cover;
-  }
-}
-
-@media screen and (min-width: 769px) and (max-width: 929px) {
-  .profile {
-    max-width: 929px;
-  }
-  .profile__title {
-    margin-right: 110px;
-  }
-  .profile__name {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 33px;
-    line-height: 1.45;
-  }
-
-  .profile__subtitle {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 1.47;
   }
 }

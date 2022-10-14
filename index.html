@@ -12,28 +12,37 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/AroundUS.png"
+          src="./images/aroundUS.svg"
           alt="around the US logo"
           class="header__logo"
         />
-        <hr class="header__divider" />
       </header>
       <main class="main">
         <section class="profile">
-          <img
-            src="./images/jacques-cousteau.jpg"
-            alt="a pic of jacque whats it to ya"
-            class="profile__picture"
-          />
+          <div class="profile__info">
+            <img
+              src="./images/jacques-cousteau.jpg"
+              alt="a pic of jacque whats it to ya"
+              class="profile__picture"
+            />
 
-          <div class="profile__text">
-            <div class="profile__title">
-              <h1 class="profile__name">Jacques Cousteau</h1>
-              <button class="profile__edit"></button>
+            <div class="profile__text">
+              <div class="profile__title">
+                <h1 class="profile__name">Jacques Cousteau</h1>
+                <button
+                  class="profile__edit"
+                  type="button"
+                  aria-label="edit profile button"
+                ></button>
+              </div>
+              <h2 class="profile__subtitle">Explorer</h2>
             </div>
-            <h2 class="profile__subtitle">Explorer</h2>
           </div>
-          <button class="profile__add"></button>
+          <button
+            class="profile__add"
+            type="button"
+            aria-label="add content button"
+          ></button>
         </section>
         <section class="cards">
           <div class="card">
@@ -43,8 +52,12 @@
               alt="yoseite"
             />
             <div class="card__info">
-              <p class="card__text">Yosemite Valley</p>
-              <button class="card__like"></button>
+              <h2 class="card__text">Yosemite Valley</h2>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="like button"
+              ></button>
             </div>
           </div>
           <div class="card">
@@ -54,8 +67,12 @@
               alt="louise"
             />
             <div class="card__info">
-              <p class="card__text">Lake Louise</p>
-              <button class="card__like"></button>
+              <h2 class="card__text">Lake Louise</h2>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="like button"
+              ></button>
             </div>
           </div>
           <div class="card">
@@ -65,15 +82,23 @@
               alt="baldy mount"
             />
             <div class="card__info">
-              <p class="card__text">Bald Mountains</p>
-              <button class="card__like"></button>
+              <h2 class="card__text">Bald Mountains</h2>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="like button"
+              ></button>
             </div>
           </div>
           <div class="card">
             <img class="card__image" src="./images/latemar.png" alt="yoseite" />
             <div class="card__info">
-              <p class="card__text">Latemar</p>
-              <button class="card__like"></button>
+              <h2 class="card__text">Latemar</h2>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="like button"
+              ></button>
             </div>
           </div>
           <div class="card">
@@ -83,8 +108,12 @@
               alt="vanoise-national-park"
             />
             <div class="card__info">
-              <p class="card__text">Vanoise National Park</p>
-              <button class="card__like"></button>
+              <h2 class="card__text">Vanoise National Park</h2>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="like button"
+              ></button>
             </div>
           </div>
           <div class="card">
@@ -94,14 +123,18 @@
               alt="lago-di-braies"
             />
             <div class="card__info">
-              <p class="card__text">Lago Di Braies</p>
-              <button class="card__like"></button>
+              <h2 class="card__text">Lago Di Braies</h2>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="like button"
+              ></button>
             </div>
           </div>
         </section>
       </main>
       <footer class="footer">
-        <h3 class="footer__copyright">© 2022 Around The U.S.</h3>
+        <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
   </body>

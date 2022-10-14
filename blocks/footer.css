@@ -2,6 +2,7 @@
   background-color: black;
   max-width: 880px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .footer__copyright {
@@ -17,15 +18,14 @@
   padding-bottom: 30px;
 }
 
-@media screen and (min-width: 360px) and (max-width: 768px) {
-  .footer__copyright {
-    margin-top: 48px;
-    width: 70%;
+@media screen and (max-width: 929px) {
+  .footer {
+    max-width: 929px;
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 929px) {
-  .footer {
-    max-width: 929px;
+@media screen and (max-width: 768px) {
+  .footer__copyright {
+    margin-top: 48px;
   }
 }
