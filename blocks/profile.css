@@ -39,7 +39,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 365px;
+  max-width: 765px;
 
   color: #ffffff;
   margin: 0;
@@ -148,6 +148,8 @@
 
   .profile__picture {
     margin-right: 0;
+    width: 120px;
+    height: 120px;
   }
 
   .profile__title {
