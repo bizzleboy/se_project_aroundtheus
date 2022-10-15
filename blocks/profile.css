@@ -43,9 +43,6 @@
 
   color: #ffffff;
   margin: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .profile__subtitle {
@@ -61,9 +58,6 @@
   color: #ffffff;
 
   margin: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .profile__edit {
