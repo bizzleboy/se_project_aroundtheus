@@ -28,4 +28,4 @@ let card6 = {
   link: "../images/yosemite-valley.jpg",
 };
 
-initialCards = [card1, card2, card3, card4, card5, card6];
+let initialCards = [card1, card2, card3, card4, card5, card6];
