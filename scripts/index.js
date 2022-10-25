@@ -29,3 +29,14 @@ let card6 = {
 };
 
 let initialCards = [card1, card2, card3, card4, card5, card6];
+let openEditor = document.querySelector(".profile__edit");
+let closeEditor = document.querySelector(".modal__close");
+let editWindow = document.querySelector(".modal");
+
+openEditor.addEventListener("click", function () {
+  editWindow.classList.add("modal_opened");
+});
+
+closeEditor.addEventListener("click", function () {
+  editWindow.classList.remove("modal_opened");
+});
