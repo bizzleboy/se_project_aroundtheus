@@ -33,6 +33,11 @@ let openEditor = document.querySelector(".profile__edit");
 let closeEditor = document.querySelector(".modal__close");
 let editWindow = document.querySelector(".modal");
 
+// prettier-ignore
+let nameInput = document.querySelector(".modal__input").setAttribute("value", document.querySelector(".profile__name").textContent);
+// prettier-ignore
+let jobInput =  document.querySelector("#subtitle").setAttribute("value", document.querySelector(".profile__subtitle").textContent);
+
 openEditor.addEventListener("click", function () {
   editWindow.classList.add("modal_opened");
 });
@@ -40,3 +45,14 @@ openEditor.addEventListener("click", function () {
 closeEditor.addEventListener("click", function () {
   editWindow.classList.remove("modal_opened");
 });
+
+function handleProfileSubmit(evt) {
+  evt.preventDefault();
+  let profileName = document.querySelector(".profile__name");
+  profileName.textContent = document.querySelector(".modal__input").value;
+
+  let profileSubtitle = document.querySelector(".profile__subtitle");
+  profileSubtitle.textContent = document.querySelector("#subtitle").value;
+}
+
+editWindow.addEventListener("submit", handleProfileSubmit);
