@@ -57,4 +57,6 @@ function handleProfileSubmit(evt) {
 
 editWindow.addEventListener("submit", handleProfileSubmit);
 
-function getCardElement(data) {}
+function getCardElement(data) {
+  let cardTemplate = document.querySelector("#card__template").textContent;
+}
