@@ -56,7 +56,24 @@ function handleProfileSubmit(evt) {
 }
 
 editWindow.addEventListener("submit", handleProfileSubmit);
+let cardsList = document.querySelector(".cards");
 
 function getCardElement(data) {
-  let cardTemplate = document.querySelector("#card__template").textContent;
+  let cardTemplate = document.querySelector("#card__template").content;
+  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  let cardName = data.name;
+  let cardLink = data.link;
+  let altText = data.name;
+
+  cardElement.querySelector(".card__image").setAttribute("src", cardLink);
+  cardElement.querySelector(".card__image").setAttribute("alt", altText);
+  cardElement.querySelector(".card__text").textContent = cardName;
+
+  return cardElement;
+}
+
+let cardsContainer = document.querySelector(".cards");
+for (card of initialCards) {
+  cardsContainer.append(getCardElement(card));
 }
