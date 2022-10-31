@@ -56,3 +56,5 @@ function handleProfileSubmit(evt) {
 }
 
 editWindow.addEventListener("submit", handleProfileSubmit);
+
+function getCardElement(data) {}
