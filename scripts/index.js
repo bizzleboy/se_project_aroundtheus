@@ -28,7 +28,7 @@ const card6 = {
   link: "./images/yosemite-valley.jpg",
 };
 
-let initialCards = [card1, card2, card3, card4, card5, card6];
+const initialCards = [card1, card2, card3, card4, card5, card6];
 const openEditor = document.querySelector(".profile__edit");
 const closeEditor = document.querySelector(".modal__close");
 const editWindow = document.querySelector(".modal");
@@ -39,25 +39,23 @@ const profileName = document.querySelector(".profile__name");
 const jobInputField = document.querySelector("#subtitle");
 const subtitleName = document.querySelector(".profile__subtitle");
 
-// prettier-ignore
-let nameInput = nameInputField.setAttribute("value",profileName.textContent);
-// prettier-ignore
-let jobInput =  jobInputField.setAttribute("value",subtitleName.textContent);
+nameInputField.setAttribute("value", profileName.textContent);
+jobInputField.setAttribute("value", subtitleName.textContent);
 
 //OPEN POPUP
 function openPopup(popup) {
-  editWindow.classList.add("modal_opened");
+  popup.classList.add("modal_opened");
 }
 
 //Open popup event listener
-openEditor.addEventListener("click", openPopup);
+openEditor.addEventListener("click", () => openPopup(editWindow));
 
 //close popup
 function closePopup(popup) {
-  editWindow.classList.remove("modal_opened");
+  popup.classList.remove("modal_opened");
 }
 
-closeEditor.addEventListener("click", closePopup);
+closeEditor.addEventListener("click", () => closePopup(editWindow));
 
 //editing profile submits
 function handleProfileSubmit(evt) {
@@ -66,19 +64,19 @@ function handleProfileSubmit(evt) {
   profileName.textContent = nameInputField.value;
 
   subtitleName.textContent = jobInputField.value;
-  closePopup(evt);
+  closePopup(editWindow);
 }
 
 editWindow.addEventListener("submit", handleProfileSubmit);
-let cardsList = document.querySelector(".cards");
+const cardsList = document.querySelector(".cards");
 
 function getCardElement(data) {
-  let cardTemplate = document.querySelector("#card__template").content;
-  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardTemplate = document.querySelector("#card__template").content;
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
-  let cardName = data.name;
-  let cardLink = data.link;
-  let altText = data.name;
+  const cardName = data.name;
+  const cardLink = data.link;
+  const altText = data.name;
 
   const cardImage = cardElement.querySelector(".card__image");
   cardImage.setAttribute("src", cardLink);
@@ -89,7 +87,7 @@ function getCardElement(data) {
   return cardElement;
 }
 
-let cardsContainer = document.querySelector(".cards");
-for (card of initialCards) {
+const cardsContainer = document.querySelector(".cards");
+for (const card of initialCards) {
   cardsContainer.append(getCardElement(card));
 }
