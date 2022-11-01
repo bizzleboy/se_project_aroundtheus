@@ -1,58 +1,72 @@
-let card1 = {
+const card1 = {
   name: "Yosemite Valley",
-  link: "../images/yosemite-valley.jpg",
+  link: "./images/yosemite-valley.jpg",
 };
 
-let card2 = {
+const card2 = {
   name: "Lake Louise",
-  link: "../images/lake-louise.png",
+  link: "./images/lake-louise.png",
 };
 
-let card3 = {
+const card3 = {
   name: "Bald Mountains",
-  link: "../images/bald-mountains.png",
+  link: "./images/bald-mountains.png",
 };
 
-let card4 = {
+const card4 = {
   name: "Latemar",
-  link: "../images/latemar.png",
+  link: "./images/latemar.png",
 };
 
-let card5 = {
+const card5 = {
   name: "Vanoise National Park",
-  link: "../images/vanoise-national-park.png",
+  link: "./images/vanoise-national-park.png",
 };
 
-let card6 = {
+const card6 = {
   name: "Yosemite Valley",
-  link: "../images/yosemite-valley.jpg",
+  link: "./images/yosemite-valley.jpg",
 };
 
 let initialCards = [card1, card2, card3, card4, card5, card6];
-let openEditor = document.querySelector(".profile__edit");
-let closeEditor = document.querySelector(".modal__close");
-let editWindow = document.querySelector(".modal");
+const openEditor = document.querySelector(".profile__edit");
+const closeEditor = document.querySelector(".modal__close");
+const editWindow = document.querySelector(".modal");
+
+const nameInputField = document.querySelector(".modal__input");
+const profileName = document.querySelector(".profile__name");
+
+const jobInputField = document.querySelector("#subtitle");
+const subtitleName = document.querySelector(".profile__subtitle");
 
 // prettier-ignore
-let nameInput = document.querySelector(".modal__input").setAttribute("value", document.querySelector(".profile__name").textContent);
+let nameInput = nameInputField.setAttribute("value",profileName.textContent);
 // prettier-ignore
-let jobInput =  document.querySelector("#subtitle").setAttribute("value", document.querySelector(".profile__subtitle").textContent);
+let jobInput =  jobInputField.setAttribute("value",subtitleName.textContent);
 
-openEditor.addEventListener("click", function () {
+//OPEN POPUP
+function openPopup(popup) {
   editWindow.classList.add("modal_opened");
-});
+}
 
-closeEditor.addEventListener("click", function () {
+//Open popup event listener
+openEditor.addEventListener("click", openPopup);
+
+//close popup
+function closePopup(popup) {
   editWindow.classList.remove("modal_opened");
-});
+}
 
+closeEditor.addEventListener("click", closePopup);
+
+//editing profile submits
 function handleProfileSubmit(evt) {
   evt.preventDefault();
-  let profileName = document.querySelector(".profile__name");
-  profileName.textContent = document.querySelector(".modal__input").value;
 
-  let profileSubtitle = document.querySelector(".profile__subtitle");
-  profileSubtitle.textContent = document.querySelector("#subtitle").value;
+  profileName.textContent = nameInputField.value;
+
+  subtitleName.textContent = jobInputField.value;
+  closePopup(evt);
 }
 
 editWindow.addEventListener("submit", handleProfileSubmit);
@@ -66,8 +80,10 @@ function getCardElement(data) {
   let cardLink = data.link;
   let altText = data.name;
 
-  cardElement.querySelector(".card__image").setAttribute("src", cardLink);
-  cardElement.querySelector(".card__image").setAttribute("alt", altText);
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.setAttribute("src", cardLink);
+  cardImage.setAttribute("alt", altText);
+
   cardElement.querySelector(".card__text").textContent = cardName;
 
   return cardElement;
