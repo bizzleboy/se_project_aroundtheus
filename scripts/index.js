@@ -68,8 +68,24 @@ function handleProfileSubmit(evt) {
 }
 
 editWindow.addEventListener("submit", handleProfileSubmit);
+
 const cardsList = document.querySelector(".cards");
 
+//addcard
+const addWindow = document.querySelector(".js-add");
+
+const addButton = document.querySelector(".profile__add");
+addButton.addEventListener("click", () => openPopup(addWindow));
+
+const closeAdd = document.querySelector(".js-close");
+closeAdd.addEventListener("click", () => closePopup(addWindow));
+
+const titleInputField = document.querySelector("#title");
+const linkInputField = document.querySelector("#link");
+
+const profileAddForm = document.querySelector("#add-form");
+
+//cardstuff
 function getCardElement(data) {
   const cardTemplate = document.querySelector("#card__template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -86,8 +102,14 @@ function getCardElement(data) {
 
   return cardElement;
 }
-
 const cardsContainer = document.querySelector(".cards");
-for (const card of initialCards) {
+
+initialCards.forEach(function (card) {
   cardsContainer.append(getCardElement(card));
-}
+});
+
+//like button
+likeButton = document.querySelector("card__like");
+
+//likeButton.setAttribute("background-image", "url('../images/heart.svg')");
+likeButton.setAttribute("width", "555");
