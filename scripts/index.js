@@ -1,3 +1,7 @@
+/*
+Cards
+############################################################
+*/
 const card1 = {
   name: "Yosemite Valley",
   link: "./images/yosemite-valley.jpg",
@@ -29,33 +33,74 @@ const card6 = {
 };
 
 const initialCards = [card1, card2, card3, card4, card5, card6];
-const openEditor = document.querySelector(".profile__edit");
-const closeEditor = document.querySelector(".modal__close");
+
+const cardsContainer = document.querySelector(".cards");
+/*
+                      POPUPS
+############################################################
+*/
+
 const editWindow = document.querySelector(".modal");
 
-const nameInputField = document.querySelector(".modal__input");
-const profileName = document.querySelector(".profile__name");
+const addWindow = document.querySelector(".js-add");
+
+const profileAddForm = document.querySelector("#add-form");
+
+/*
+                      BUTTONS
+############################################################
+*/
+
+const openEditor = document.querySelector(".profile__edit");
+const closeEditor = document.querySelector(".modal__close");
+
+const addButton = document.querySelector(".profile__add");
+
+const closeAdd = document.querySelector(".js-close");
+
+const deleteButton = document.querySelector(".card__delete");
+
+/*
+                      INPUTS
+############################################################
+*/
 
 const jobInputField = document.querySelector("#subtitle");
-const subtitleName = document.querySelector(".profile__subtitle");
 
+const nameInputField = document.querySelector(".modal__input");
+
+const titleInputField = document.querySelector("#title");
+
+const linkInputField = document.querySelector("#link");
+
+/*
+                      SETTING TEXT VALUES
+############################################################
+*/
+const profileName = document.querySelector(".profile__name");
+const subtitleName = document.querySelector(".profile__subtitle");
 nameInputField.setAttribute("value", profileName.textContent);
 jobInputField.setAttribute("value", subtitleName.textContent);
 
+/*
+                      FUNCTIONS
+############################################################
+*/
 //OPEN POPUP
 function openPopup(popup) {
   popup.classList.add("modal_opened");
 }
-
 //Open popup event listener
 openEditor.addEventListener("click", () => openPopup(editWindow));
+addButton.addEventListener("click", () => openPopup(addWindow));
 
-//close popup
+//CLOSE POPUP
 function closePopup(popup) {
   popup.classList.remove("modal_opened");
 }
-
+//CLOSE POPUP EVENT LISTENER
 closeEditor.addEventListener("click", () => closePopup(editWindow));
+closeAdd.addEventListener("click", () => closePopup(addWindow));
 
 //editing profile submits
 function handleProfileSubmit(evt) {
@@ -67,23 +112,8 @@ function handleProfileSubmit(evt) {
   closePopup(editWindow);
 }
 
+//EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
-
-const cardsList = document.querySelector(".cards");
-
-//addcard
-const addWindow = document.querySelector(".js-add");
-
-const addButton = document.querySelector(".profile__add");
-addButton.addEventListener("click", () => openPopup(addWindow));
-
-const closeAdd = document.querySelector(".js-close");
-closeAdd.addEventListener("click", () => closePopup(addWindow));
-
-const titleInputField = document.querySelector("#title");
-const linkInputField = document.querySelector("#link");
-
-const profileAddForm = document.querySelector("#add-form");
 
 //cardstuff
 function getCardElement(data) {
@@ -102,14 +132,15 @@ function getCardElement(data) {
 
   return cardElement;
 }
-const cardsContainer = document.querySelector(".cards");
 
 initialCards.forEach(function (card) {
   cardsContainer.append(getCardElement(card));
 });
 
-//like button
-likeButton = document.querySelector("card__like");
+//DELETING FUNCTION
+function deleteCard(evt) {
+  evt.target.closest(".card").remove();
+}
 
-//likeButton.setAttribute("background-image", "url('../images/heart.svg')");
-likeButton.setAttribute("width", "555");
+//REMOVING ELEMENT IN CARDS
+cardsContainer.addEventListener("click", deleteCard);
