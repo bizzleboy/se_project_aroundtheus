@@ -58,7 +58,11 @@ const addButton = document.querySelector(".profile__add");
 
 const closeAdd = document.querySelector(".js-close");
 
+const likeButton = document.querySelector(".card__like");
+
 const deleteButton = document.querySelector(".card__delete");
+
+const createButton = document.querySelector("#create-btn");
 
 /*
                       INPUTS
@@ -112,6 +116,8 @@ function handleProfileSubmit(evt) {
   closePopup(editWindow);
 }
 
+//handling createnButton
+
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
 
@@ -130,17 +136,38 @@ function getCardElement(data) {
 
   cardElement.querySelector(".card__text").textContent = cardName;
 
+  const likeButton = cardElement.querySelector(".card__like");
+  const deleteButton = cardElement.querySelector(".card__delete");
+
+  //LIKING PICTURES
+  const handleLikeIcon = (evt) => {
+    evt.target.classList.toggle("card__like-active");
+  };
+  likeButton.addEventListener("click", handleLikeIcon);
+
+  //DELETING FUNCTION
+  function deleteCard(evt) {
+    evt.target.closest(".card").remove();
+  }
+
+  //REMOVING ELEMENT IN CARDS
+  deleteButton.addEventListener("click", deleteCard);
+
   return cardElement;
 }
-
+//WHY DID THE LIKE AND DELETE HAVE TO BE WITHIN THE  getCardElement
 initialCards.forEach(function (card) {
   cardsContainer.append(getCardElement(card));
 });
 
-//DELETING FUNCTION
-function deleteCard(evt) {
-  evt.target.closest(".card").remove();
+//adding cards
+function addCard(evt) {
+  evt.preventDefault();
+  const card3 = {
+    name: titleInputField.value,
+    link: linkInputField.value,
+  };
+  initialCards.append(getCardElement(createdCard));
 }
 
-//REMOVING ELEMENT IN CARDS
-cardsContainer.addEventListener("click", deleteCard);
+createButton.addEventListener("submit", addCard);

@@ -54,6 +54,10 @@
   opacity: 0.5;
 }
 
+.card__like-active {
+  background-image: url("../images/heartclick.svg");
+}
+
 .card__delete {
   position: absolute;
   width: 18px;
