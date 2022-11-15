@@ -125,7 +125,6 @@ function cardImageHandler(data) {
     link: linkInputField.value,
   };
 }
-
 //handler for preview
 function handlePreviewClick(data) {
   console.log("maa");
@@ -141,6 +140,7 @@ function handlePreviewClick(data) {
 
   openPopup(previewPopup);
 }
+
 //cardstuff
 function getCardElement(data) {
   const cardTemplate = document.querySelector("#card__template").content;
