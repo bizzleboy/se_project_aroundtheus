@@ -54,7 +54,7 @@ const previewPopup = document.querySelector("#preview");
 */
 
 const openEditor = document.querySelector(".profile__edit");
-const closeEditor = document.querySelector(".edit__close");
+const closeEditor = document.querySelector("#edit-close");
 
 const addButton = document.querySelector(".profile__add");
 
