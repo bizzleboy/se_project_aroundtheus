@@ -26,7 +26,7 @@
 }
 .modal_opened {
   display: flex;
-  visibility: visiblzs;
+  visibility: visible;
 }
 .modal__close {
   width: 40px;
