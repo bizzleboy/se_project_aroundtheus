@@ -46,6 +46,8 @@ const addWindow = document.querySelector("#add");
 
 const profileAddForm = document.querySelector("#add-form");
 
+const previewPopup = document.querySelector("#preview");
+
 /*
                       BUTTONS
 ############################################################
@@ -124,16 +126,28 @@ function cardImageHandler(data) {
   };
 }
 
+//handler for preview
+function handlePreviewClick(data) {
+  console.log("maa");
+  const previewLink = data.link;
+  const previewAlt = data.name;
+  const previewCaption = data.name;
+
+  //prettier-ignore
+  previewPopup.querySelector(".modal__preview-image").setAttribute("src", previewLink);
+  //prettier-ignore
+  previewPopup.querySelector(".modal__preview-image").setAttribute("alt", previewLink);
+  previewPopup.querySelector(".modal__caption").textContent = data.name;
+
+  openPopup(previewPopup);
+}
 //cardstuff
 function getCardElement(data) {
   const cardTemplate = document.querySelector("#card__template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
-  const previewTemplate = document.querySelector("#preview-template").content;
-  // prettier-ignore
-  const previewElement = previewTemplate.querySelector(".modal__preview").cloneNode(true);
-
   const cardName = data.name;
+
   const cardLink = data.link;
   const altText = data.name;
 
@@ -141,16 +155,12 @@ function getCardElement(data) {
   cardImage.setAttribute("src", cardLink);
   cardImage.setAttribute("alt", altText);
 
-  const previewImage = previewElement.querySelector(".modal__preview-image");
-  previewImage.setAttribute("src", cardLink);
   cardImage.setAttribute("alt", altText);
 
   cardElement.querySelector(".card__text").textContent = cardName;
 
   const likeButton = cardElement.querySelector(".card__like");
   const deleteButton = cardElement.querySelector(".card__delete");
-  const closePreview = document.querySelector(".modal__close-preview");
-  // const previewImage = document.querySelector("#preview");
 
   //LIKING PICTURES
   const handleLikeIcon = (evt) => {
@@ -166,16 +176,12 @@ function getCardElement(data) {
   //REMOVING ELEMENT IN CARDS
   deleteButton.addEventListener("click", deleteCard);
 
-  //PREVIEWING CARDS
-  cardImage.addEventListener("click", () => openPopup(previewElement));
-
-  //CLOSING PREVIEW
-
-  //closePreview.addEventListener("click", () => closePopup(previewImage));
+  //SETTING PREVIEW LINK
+  cardImage.addEventListener("click", () => handlePreviewClick(data));
 
   return cardElement;
 }
-//WHY DID THE LIKE AND DELETE HAVE TO BE WITHIN THE  getCardElement
+
 initialCards.forEach(function (card) {
   cardsContainer.append(getCardElement(card));
 });
@@ -189,7 +195,7 @@ function addCard(evt) {
     name: titleInputField.value,
     link: linkInputField.value,
   };
-  cardsContainer.append(getCardElement(createdCard));
+  cardsContainer.prepend(getCardElement(createdCard));
   addWindow.closePopup();
 }
 
