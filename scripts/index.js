@@ -40,9 +40,9 @@ const cardsContainer = document.querySelector(".cards");
 ############################################################
 */
 
-const editWindow = document.querySelector(".modal");
+const editWindow = document.querySelector("#edit");
 
-const addWindow = document.querySelector(".js-add");
+const addWindow = document.querySelector("#add");
 
 const profileAddForm = document.querySelector("#add-form");
 
@@ -57,10 +57,6 @@ const closeEditor = document.querySelector(".modal__close");
 const addButton = document.querySelector(".profile__add");
 
 const closeAdd = document.querySelector(".js-close");
-
-const likeButton = document.querySelector(".card__like");
-
-const deleteButton = document.querySelector(".card__delete");
 
 const createButton = document.querySelector("#create-btn");
 
@@ -121,10 +117,16 @@ function handleProfileSubmit(evt) {
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
 
+function cardImageHandler(data) {
+  console.log("a");
+}
+
 //cardstuff
 function getCardElement(data) {
   const cardTemplate = document.querySelector("#card__template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  const previewImage = document.querySelector("#preview");
 
   const cardName = data.name;
   const cardLink = data.link;
@@ -138,6 +140,7 @@ function getCardElement(data) {
 
   const likeButton = cardElement.querySelector(".card__like");
   const deleteButton = cardElement.querySelector(".card__delete");
+  const closePreview = document.querySelector(".modal__close-preview");
 
   //LIKING PICTURES
   const handleLikeIcon = (evt) => {
@@ -153,21 +156,32 @@ function getCardElement(data) {
   //REMOVING ELEMENT IN CARDS
   deleteButton.addEventListener("click", deleteCard);
 
+  //PREVIEWING CARDS
+  cardImage.addEventListener("click", () => cardImageHandler(data));
+
+  //CLOSING PREVIEW
+
+  closePreview.addEventListener("click", () => closePopup(previewImage));
+
   return cardElement;
 }
 //WHY DID THE LIKE AND DELETE HAVE TO BE WITHIN THE  getCardElement
 initialCards.forEach(function (card) {
   cardsContainer.append(getCardElement(card));
 });
+//APPEND TO CARDS CONTAINER
 
 //adding cards
 function addCard(evt) {
   evt.preventDefault();
-  const card3 = {
+
+  const createdCard = {
     name: titleInputField.value,
     link: linkInputField.value,
   };
-  initialCards.append(getCardElement(createdCard));
+  cardsContainer.append(getCardElement(createdCard));
+  addWindow.closePopup();
 }
 
-createButton.addEventListener("submit", addCard);
+const addForm = document.querySelector("#add-form");
+addForm.addEventListener("submit", addCard);

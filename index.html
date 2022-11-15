@@ -64,11 +64,23 @@
             </div>
           </template>
         </section>
+
+        <div class="modal modal_opened" id="preview">
+          <div class="modal__preview">
+            <button
+              type="button"
+              src="./images/CloseIcon.svg"
+              class="modal__close-preview modal__close"
+            ></button>
+            <img src="" class="modal__preview-image" />
+            <p class="modal__caption"></p>
+          </div>
+        </div>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
-      <div class="modal">
+      <div class="modal" id="edit">
         <div class="modal__container">
           <button
             type="button"
@@ -95,7 +107,7 @@
           </form>
         </div>
       </div>
-      <div class="modal js-add">
+      <div class="modal" id="add">
         <div class="modal__container">
           <button
             type="button"
@@ -117,7 +129,9 @@
               </label>
             </fieldset>
             <fieldset class="modal__fieldset">
-              <button class="modal__button" id="create-btn">Create</button>
+              <button class="modal__button" id="create-btn" type="submit">
+                Create
+              </button>
             </fieldset>
           </form>
         </div>

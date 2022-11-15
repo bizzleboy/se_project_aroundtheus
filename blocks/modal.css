@@ -11,7 +11,16 @@
   bottom: 0;
   flex-direction: column;
 }
-
+.modal__preview {
+  position: fixed;
+  left: 50%;
+  margin-left: -282px;
+  margin-top: 282px;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+}
 .modal_opened {
   display: flex;
 }
@@ -27,6 +36,12 @@
   border-style: none;
   background-color: transparent;
 }
+
+.modal__close-preview {
+  left: 560px;
+  bottom: 0;
+}
+
 .modal__container {
   background-color: white;
   width: 430px;
@@ -37,8 +52,8 @@
   position: fixed;
   left: 50%;
   top: 50%;
-  margin-top: -165px;
-  margin-left: -215px;
+  margin-top: -282px;
+  margin-left: -282px;
 }
 
 .modal__form {
