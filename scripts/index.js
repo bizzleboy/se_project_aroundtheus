@@ -54,13 +54,15 @@ const previewPopup = document.querySelector("#preview");
 */
 
 const openEditor = document.querySelector(".profile__edit");
-const closeEditor = document.querySelector(".modal__close");
+const closeEditor = document.querySelector(".edit__close");
 
 const addButton = document.querySelector(".profile__add");
 
 const closeAdd = document.querySelector(".js-close");
 
 const createButton = document.querySelector("#create-btn");
+
+const closePreview = previewPopup.querySelector("#preview-close");
 
 /*
                       INPUTS
@@ -90,7 +92,7 @@ jobInputField.setAttribute("value", subtitleName.textContent);
 */
 //OPEN POPUP
 function openPopup(popup) {
-  popup.classList.add("modal_opened");
+  popup.classList.add("modal__opened");
 }
 //Open popup event listener
 openEditor.addEventListener("click", () => openPopup(editWindow));
@@ -98,7 +100,7 @@ addButton.addEventListener("click", () => openPopup(addWindow));
 
 //CLOSE POPUP
 function closePopup(popup) {
-  popup.classList.remove("modal_opened");
+  popup.classList.remove("modal__opened");
 }
 //CLOSE POPUP EVENT LISTENER
 closeEditor.addEventListener("click", () => closePopup(editWindow));
@@ -178,6 +180,7 @@ function getCardElement(data) {
 
   //SETTING PREVIEW LINK
   cardImage.addEventListener("click", () => handlePreviewClick(data));
+  closePreview.addEventListener("click", () => closePopup(previewPopup));
 
   return cardElement;
 }
@@ -196,7 +199,7 @@ function addCard(evt) {
     link: linkInputField.value,
   };
   cardsContainer.prepend(getCardElement(createdCard));
-  addWindow.closePopup();
+  closePopup(addWindow);
 }
 
 const addForm = document.querySelector("#add-form");
