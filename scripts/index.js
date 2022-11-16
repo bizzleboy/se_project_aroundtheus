@@ -35,6 +35,7 @@ const card6 = {
 const initialCards = [card1, card2, card3, card4, card5, card6];
 
 const cardsContainer = document.querySelector(".cards");
+const cardTemplate = document.querySelector("#card__template").content;
 /*
                       POPUPS
 ############################################################
@@ -53,16 +54,16 @@ const previewPopup = document.querySelector("#preview");
 ############################################################
 */
 
-const openEditor = document.querySelector(".profile__edit");
-const closeEditor = document.querySelector("#edit-close");
+const openProfileEditorButton = document.querySelector(".profile__edit");
+const closeProfileEditorButton = document.querySelector("#edit-close");
 
 const addButton = document.querySelector(".profile__add");
 
-const closeAdd = document.querySelector(".js-close");
+const closeAddPictureButton = document.querySelector(".js-close");
 
 const createButton = document.querySelector("#create-btn");
 
-const closePreview = previewPopup.querySelector("#preview-close");
+const closePreviewPopupButton = previewPopup.querySelector("#preview-close");
 
 /*
                       INPUTS
@@ -83,8 +84,11 @@ const linkInputField = document.querySelector("#link");
 */
 const profileName = document.querySelector(".profile__name");
 const subtitleName = document.querySelector(".profile__subtitle");
-nameInputField.setAttribute("value", profileName.textContent);
-jobInputField.setAttribute("value", subtitleName.textContent);
+
+function fillProfileForm() {
+  nameInputField.setAttribute("value", profileName.textContent);
+  jobInputField.setAttribute("value", subtitleName.textContent);
+}
 
 /*
                       FUNCTIONS
@@ -95,7 +99,10 @@ function openPopup(popup) {
   popup.classList.add("modal__opened");
 }
 //Open popup event listener
-openEditor.addEventListener("click", () => openPopup(editWindow));
+openProfileEditorButton.addEventListener("click", () => {
+  fillProfileForm();
+  openPopup(editWindow);
+});
 addButton.addEventListener("click", () => openPopup(addWindow));
 
 //CLOSE POPUP
@@ -103,8 +110,10 @@ function closePopup(popup) {
   popup.classList.remove("modal__opened");
 }
 //CLOSE POPUP EVENT LISTENER
-closeEditor.addEventListener("click", () => closePopup(editWindow));
-closeAdd.addEventListener("click", () => closePopup(addWindow));
+closeProfileEditorButton.addEventListener("click", () =>
+  closePopup(editWindow)
+);
+closeAddPictureButton.addEventListener("click", () => closePopup(addWindow));
 
 //editing profile submits
 function handleProfileSubmit(evt) {
@@ -121,34 +130,30 @@ function handleProfileSubmit(evt) {
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
 
-function cardImageHandler(data) {
-  const createdCard = {
-    name: titleInputField.value,
-    link: linkInputField.value,
-  };
-}
 //handler for preview
 function handlePreviewClick(data) {
-  console.log("maa");
   const previewLink = data.link;
   const previewAlt = data.name;
   const previewCaption = data.name;
+  const modalPreviewImage = previewPopup.querySelector(".modal__preview-image");
+  const modalPreviewPictureCaption =
+    previewPopup.querySelector(".modal__caption");
 
   //prettier-ignore
-  previewPopup.querySelector(".modal__preview-image").setAttribute("src", previewLink);
+  modalPreviewImage.setAttribute("src", previewLink);
   //prettier-ignore
-  previewPopup.querySelector(".modal__preview-image").setAttribute("alt", previewLink);
-  previewPopup.querySelector(".modal__caption").textContent = data.name;
+  modalPreviewImage.setAttribute("alt", previewLink);
+  modalPreviewPictureCaption.textContent = data.name;
 
   openPopup(previewPopup);
 }
 
 //cardstuff
 function getCardElement(data) {
-  const cardTemplate = document.querySelector("#card__template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   const cardName = data.name;
+  const cardText = cardElement.querySelector(".card__text");
 
   const cardLink = data.link;
   const altText = data.name;
@@ -157,9 +162,7 @@ function getCardElement(data) {
   cardImage.setAttribute("src", cardLink);
   cardImage.setAttribute("alt", altText);
 
-  cardImage.setAttribute("alt", altText);
-
-  cardElement.querySelector(".card__text").textContent = cardName;
+  cardText.textContent = cardName;
 
   const likeButton = cardElement.querySelector(".card__like");
   const deleteButton = cardElement.querySelector(".card__delete");
@@ -180,10 +183,13 @@ function getCardElement(data) {
 
   //SETTING PREVIEW LINK
   cardImage.addEventListener("click", () => handlePreviewClick(data));
-  closePreview.addEventListener("click", () => closePopup(previewPopup));
 
   return cardElement;
 }
+
+closePreviewPopupButton.addEventListener("click", () =>
+  closePopup(previewPopup)
+);
 
 initialCards.forEach(function (card) {
   cardsContainer.append(getCardElement(card));
@@ -200,6 +206,7 @@ function addCard(evt) {
   };
   cardsContainer.prepend(getCardElement(createdCard));
   closePopup(addWindow);
+  profileAddForm.reset();
 }
 
 const addForm = document.querySelector("#add-form");
