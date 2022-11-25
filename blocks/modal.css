@@ -108,6 +108,10 @@
   height: 14px;
 }
 
+.modal__input-invalid {
+  border-bottom: 1px solid red;
+}
+
 .modal__button {
   width: 358px;
   height: 50px;
