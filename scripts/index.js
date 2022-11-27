@@ -37,10 +37,9 @@ const card5 = {
 };
 
 const card6 = {
-  name: "Yosemite Valley",
-  link: "./images/yosemite-valley.jpg",
+  name: "Lago Di Braies",
+  link: "./images/lago-di-braies.png",
 };
-
 const initialCards = [card1, card2, card3, card4, card5, card6];
 
 const cardsContainer = document.querySelector(".cards");
