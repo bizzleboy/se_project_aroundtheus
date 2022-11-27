@@ -15,6 +15,7 @@
   opacity: 0;
   transition: visibility 0s 0.5s, opacity 0.5s linear;
   display: flex;
+  cursor: pointer;
 }
 .modal__preview {
   color: white;
@@ -94,6 +95,7 @@
 
 .modal__label:last-child {
   margin-bottom: 0;
+  margin-top: 13px;
 }
 
 .modal__input {
@@ -106,10 +108,17 @@
   border-bottom-width: 1px;
   padding-bottom: 14px;
   height: 14px;
+  display: flex;
 }
 
 .modal__input-invalid {
   border-bottom: 1px solid red;
+  margin-bottom: 5px;
+}
+
+.modal__input-error {
+  margin-top: 5px;
+  color: red;
 }
 
 .modal__button {
@@ -121,6 +130,11 @@
   margin-top: 48px;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.modal__button-inactive {
+  opacity: 80%;
+  cursor: not-allowed;
 }
 
 @media screen and (max-width: 768px) {

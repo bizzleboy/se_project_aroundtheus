@@ -49,6 +49,8 @@ const profileAddForm = document.querySelector("#add-form");
 
 const previewPopup = document.querySelector("#preview");
 
+const modal = document.querySelector(".modal");
+
 /*
                       BUTTONS
 ############################################################
@@ -115,7 +117,7 @@ closeProfileEditorButton.addEventListener("click", () =>
 );
 closeAddPictureButton.addEventListener("click", () => closePopup(addWindow));
 
-//editing profile submits
+//editing profile submitsd
 function handleProfileSubmit(evt) {
   evt.preventDefault();
 
@@ -125,6 +127,24 @@ function handleProfileSubmit(evt) {
   closePopup(editWindow);
 }
 
+//handle closing modal alternatives
+function escapeModal() {
+  const modalList = Array.from(document.querySelectorAll(".modal"));
+  modalList.forEach((modalElement) => {
+    document.addEventListener("keydown", (evt) => {
+      if (evt.key === "Escape") {
+        closePopup(modalElement);
+      }
+    });
+  });
+
+  modalList.forEach((modalElement) => {
+    modalElement.addEventListener("click", (evt) => {
+      closePopup(evt.target);
+    });
+  });
+}
+escapeModal();
 //handling createnButton
 
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
