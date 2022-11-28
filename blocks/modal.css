@@ -126,15 +126,26 @@
   height: 50px;
   background-color: black;
   color: white;
-  border: 0;
+
   margin-top: 48px;
   border-radius: 2px;
   cursor: pointer;
+  border: none;
+}
+
+.modal__button:hover {
+  opacity: 20%;
 }
 
 .modal__button-inactive {
-  opacity: 80%;
   cursor: not-allowed;
+  color: #c4c4c4;
+  background-color: white;
+  border: 1px solid #c4c4c4;
+}
+
+.modal__button-inactive:hover {
+  opacity: 100%;
 }
 
 @media screen and (max-width: 768px) {

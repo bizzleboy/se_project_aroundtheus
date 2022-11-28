@@ -57,8 +57,6 @@ const profileAddForm = document.querySelector("#add-form");
 
 const previewPopup = document.querySelector("#preview");
 
-const modal = document.querySelector(".modal");
-
 /*
                       BUTTONS
 ############################################################
@@ -104,9 +102,27 @@ function fillProfileForm() {
                       FUNCTIONS
 ############################################################
 */
+
+function closeModalEscape(evt) {
+  if (evt.key === "Escape") {
+    // search for an opened modal
+    const openedModal = document.querySelector(".modal__opened");
+    // close it
+    closePopup(openedModal);
+  }
+}
+
+function closeModalMouseDown(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  }
+}
+
 //OPEN POPUP
 function openPopup(popup) {
   popup.classList.add("modal__opened");
+  document.addEventListener("keydown", closeModalEscape);
+  popup.addEventListener("mousedown", closeModalMouseDown);
 }
 //Open popup event listener
 openProfileEditorButton.addEventListener("click", () => {
@@ -118,6 +134,8 @@ addButton.addEventListener("click", () => openPopup(addWindow));
 //CLOSE POPUP
 function closePopup(popup) {
   popup.classList.remove("modal__opened");
+  document.removeEventListener("keydown", closeModalEscape);
+  popup.removeEventListener("mousedown", closeModalMouseDown);
 }
 //CLOSE POPUP EVENT LISTENER
 closeProfileEditorButton.addEventListener("click", () =>
@@ -136,24 +154,6 @@ function handleProfileSubmit(evt) {
 }
 
 //handle closing modal alternatives
-function escapeModal() {
-  const modalList = Array.from(document.querySelectorAll(".modal"));
-  modalList.forEach((modalElement) => {
-    document.addEventListener("keydown", (evt) => {
-      if (evt.key === "Escape") {
-        closePopup(modalElement);
-      }
-    });
-  });
-
-  modalList.forEach((modalElement) => {
-    modalElement.addEventListener("click", (evt) => {
-      closePopup(evt.target);
-    });
-  });
-}
-escapeModal();
-//handling createnButton
 
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
@@ -225,7 +225,8 @@ initialCards.forEach(function (card) {
 //APPEND TO CARDS CONTAINER
 
 //adding cards
-function addCard(evt) {
+function addCard(evt, config) {
+  const inputList = Array.from(addWindow.querySelectorAll(".modal__input"));
   evt.preventDefault();
 
   const createdCard = {
@@ -235,6 +236,7 @@ function addCard(evt) {
   cardsContainer.prepend(getCardElement(createdCard));
   closePopup(addWindow);
   profileAddForm.reset();
+  toggleButtonState(inputList, createButton, config);
 }
 
 const addForm = document.querySelector("#add-form");

@@ -13,7 +13,7 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
 
 const hideInputError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(config.formTypeError);
+
   errorElement.classList.remove(config.activateError);
   inputElement.classList.remove(config.invalidInput);
   errorElement.textContent = "";
