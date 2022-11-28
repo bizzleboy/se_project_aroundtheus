@@ -225,18 +225,17 @@ initialCards.forEach(function (card) {
 //APPEND TO CARDS CONTAINER
 
 //adding cards
-function addCard(evt, config) {
-  const inputList = Array.from(addWindow.querySelectorAll(".modal__input"));
+function addCard(evt) {
   evt.preventDefault();
 
   const createdCard = {
     name: titleInputField.value,
     link: linkInputField.value,
   };
+  createButton.classList.add("modal__button-inactive");
   cardsContainer.prepend(getCardElement(createdCard));
   closePopup(addWindow);
   profileAddForm.reset();
-  toggleButtonState(inputList, createButton, config);
 }
 
 const addForm = document.querySelector("#add-form");
