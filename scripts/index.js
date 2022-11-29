@@ -232,10 +232,11 @@ function addCard(evt) {
     name: titleInputField.value,
     link: linkInputField.value,
   };
-  createButton.classList.add("modal__button-inactive");
+
   cardsContainer.prepend(getCardElement(createdCard));
   closePopup(addWindow);
   profileAddForm.reset();
+  toggleButtonState([titleInputField, linkInputField], createButton, config);
 }
 
 const addForm = document.querySelector("#add-form");
