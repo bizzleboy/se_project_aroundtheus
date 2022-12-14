@@ -3,7 +3,7 @@
 
 =======================Functions================
 */
-
+/*
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(config.invalidInput);
@@ -75,3 +75,4 @@ function enableValidation(config) {
 }
 
 enableValidation(config);
+*/

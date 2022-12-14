@@ -1,12 +1,5 @@
-const config = {
-  invalidInput: "modal__input-invalid",
-  activateError: "form__input-error_active",
-  formTypeError: "form__input_type_error",
-  inactiveButton: "modal__button-inactive",
-  modalInput: ".modal__input",
-  modalButton: ".modal__button",
-  modalForm: ".modal__form",
-};
+import FormValidator from "./FormValidator.js";
+
 /*
 Cards
 ############################################################
@@ -55,8 +48,12 @@ const addWindow = document.querySelector("#add");
 
 const profileAddForm = document.querySelector("#add-form");
 
+const profileEditForm = document.querySelector("#edit-form");
+
 const previewPopup = document.querySelector("#preview");
 
+console.log(profileAddForm);
+console.log(profileEditForm);
 /*
                       BUTTONS
 ############################################################
@@ -236,8 +233,24 @@ function addCard(evt) {
   cardsContainer.prepend(getCardElement(createdCard));
   closePopup(addWindow);
   profileAddForm.reset();
-  toggleButtonState([titleInputField, linkInputField], createButton, config);
+  // toggleButtonState([titleInputField, linkInputField], createButton, config);
 }
 
 const addForm = document.querySelector("#add-form");
 addForm.addEventListener("submit", addCard);
+
+const config = {
+  invalidInput: "modal__input-invalid",
+  activateError: "form__input-error_active",
+  formTypeError: "form__input_type_error",
+  inactiveButton: "modal__button-inactive",
+  modalInput: ".modal__input",
+  modalButton: ".modal__button",
+  modalForm: ".modal__form",
+};
+
+const editFormValidator = new FormValidator(config, profileEditForm);
+const addFormValidator = new FormValidator(config, profileAddForm);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
