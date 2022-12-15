@@ -1,3 +1,4 @@
+import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
 /*
@@ -100,6 +101,12 @@ function fillProfileForm() {
 ############################################################
 */
 
+const cardSelector = ".card__template";
+/*
+                      FUNCTIONS
+############################################################
+*/
+
 function closeModalEscape(evt) {
   if (evt.key === "Escape") {
     // search for an opened modal
@@ -154,7 +161,7 @@ function handleProfileSubmit(evt) {
 
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
-
+/*
 //handler for preview
 function handlePreviewClick(data) {
   const previewLink = data.link;
@@ -212,13 +219,24 @@ function getCardElement(data) {
   return cardElement;
 }
 
+*/
+
 closePreviewPopupButton.addEventListener("click", () =>
   closePopup(previewPopup)
 );
 
-initialCards.forEach(function (card) {
-  cardsContainer.append(getCardElement(card));
+initialCards.forEach(function (cardElement) {
+  const card = new Card([cardElement.name, cardElement.link], cardSelector);
+  cardsContainer.append(card.getElement());
 });
+
+/*
+const renderCard = (data, wrap) => {
+  const card = new Card(data, cardSelector);
+  wrap.append(card.getElement());
+};
+
+*/
 //APPEND TO CARDS CONTAINER
 
 //adding cards
