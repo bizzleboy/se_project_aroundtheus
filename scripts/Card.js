@@ -6,30 +6,30 @@ class Card {
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener("click", () => this._handleLikeIcon);
-    this._deleteButton.addEventListener("click", () => this._deleteCard);
-    this._cardImage.addEventListener("click", () =>
-      this._handlePreviewClick(data)
-    );
+    this._likeButton.addEventListener("click", this._handleLikeIcon.bind(this));
+    this._deleteButton.addEventListener("click", this._deleteCard.bind(this));
+    this._cardImage.addEventListener("click", () => this._handlePreviewClick());
   }
 
-  _handleLikeIcon(evt) {
+  _handleLikeIcon() {
+    console.log(this._likeButton);
     this._likeButton.classList.toggle("card__like-active");
   }
 
-  _deleteCard(evt) {
-    evt.target.closest(".card").remove();
+  _deleteCard() {
+    this._deleteButtonclosest(".card").remove();
   }
 
-  _handlePreviewClick(data) {
-    const previewLink = data.link;
-    const previewAlt = data.name;
-    const previewCaption = data.name;
-    const modalPreviewImage = previewPopup.querySelector(
+  _handlePreviewClick() {
+    const previewLink = this._link;
+    const previewAlt = this._name;
+    const previewCaption = this.name;
+    const modalPreviewImage = this._element.querySelector(
       ".modal__preview-image"
     );
-    const modalPreviewPictureCaption =
-      previewPopup.querySelector(".modal__caption");
+    console.log(this._element);
+    console.log(modalPreviewImage);
+    const modalPreviewPictureCaption = previewAlt;
 
     //prettier-ignore
     modalPreviewImage.setAttribute("src", previewLink);
@@ -42,19 +42,23 @@ class Card {
 
   _getTemplate() {
     //prettier-ignore
-    document.querySelector(this._selector).content.querySelector(".card").cloneNode(true);
+    return document.querySelector(this._selector).content.querySelector(".card").cloneNode(true);
   }
   getElement() {
     this._element = this._getTemplate();
-    this._setEventListeners();
+
     this._likeButton = this._element.querySelector(".card__like");
     this._deleteButton = this._element.querySelector(".card__delete");
     this._cardImage = this._element.querySelector(".card__image");
 
+    this._setEventListeners();
+
     this._element.querySelector(
       ".card__image"
     ).style.backgroundImage = `url(${this._link})`;
-    this._element.querySelector(".card__text").textContent = this.name;
+    this._element.querySelector(".card__text").textContent = this._name;
+
+    return this._element;
   }
 }
 export default Card;

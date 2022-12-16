@@ -53,8 +53,6 @@ const profileEditForm = document.querySelector("#edit-form");
 
 const previewPopup = document.querySelector("#preview");
 
-console.log(profileAddForm);
-console.log(profileEditForm);
 /*
                       BUTTONS
 ############################################################
@@ -101,7 +99,7 @@ function fillProfileForm() {
 ############################################################
 */
 
-const cardSelector = ".card__template";
+const cardSelector = "#card__template";
 /*
                       FUNCTIONS
 ############################################################
@@ -226,8 +224,8 @@ closePreviewPopupButton.addEventListener("click", () =>
 );
 
 initialCards.forEach(function (cardElement) {
-  const card = new Card([cardElement.name, cardElement.link], cardSelector);
-  cardsContainer.append(card.getElement());
+  const card = new Card(cardElement, cardSelector);
+  cardsContainer.prepend(card.getElement());
 });
 
 /*
@@ -247,8 +245,8 @@ function addCard(evt) {
     name: titleInputField.value,
     link: linkInputField.value,
   };
-
-  cardsContainer.prepend(getCardElement(createdCard));
+  const card = new Card(createdCard, cardSelector);
+  cardsContainer.prepend(card.getElement);
   closePopup(addWindow);
   profileAddForm.reset();
   // toggleButtonState([titleInputField, linkInputField], createButton, config);
