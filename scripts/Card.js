@@ -12,32 +12,35 @@ class Card {
   }
 
   _handleLikeIcon() {
-    console.log(this._likeButton);
     this._likeButton.classList.toggle("card__like-active");
   }
 
   _deleteCard() {
-    this._deleteButtonclosest(".card").remove();
+    this._deleteButton.closest(".card").remove();
   }
 
   _handlePreviewClick() {
+    this._preview = document.querySelector("#preview");
+    console.log(this._preview);
     const previewLink = this._link;
     const previewAlt = this._name;
-    const previewCaption = this.name;
-    const modalPreviewImage = this._element.querySelector(
+
+    const previewCaption = this._name;
+    const modalPreviewImage = this._preview.querySelector(
       ".modal__preview-image"
     );
-    console.log(this._element);
-    console.log(modalPreviewImage);
-    const modalPreviewPictureCaption = previewAlt;
+
+    let modalPreviewPictureCaption = previewAlt;
 
     //prettier-ignore
     modalPreviewImage.setAttribute("src", previewLink);
     //prettier-ignore
-    modalPreviewImage.setAttribute("alt", previewLink);
-    modalPreviewPictureCaption.textContent = data.name;
+    modalPreviewImage.setAttribute("alt", previewAlt);
+    this._preview.querySelector(".modal__caption").textContent = this._name;
 
-    openPopup(previewPopup);
+    this._preview.classList.add("modal__opened");
+
+    //open popup??
   }
 
   _getTemplate() {

@@ -116,6 +116,7 @@ function closeModalEscape(evt) {
 
 function closeModalMouseDown(evt) {
   if (evt.target === evt.currentTarget) {
+    console.log("lol");
     closePopup(evt.target);
   }
 }
@@ -156,86 +157,16 @@ function handleProfileSubmit(evt) {
 }
 
 //handle closing modal alternatives
-
-//EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
-editWindow.addEventListener("submit", handleProfileSubmit);
-/*
-//handler for preview
-function handlePreviewClick(data) {
-  const previewLink = data.link;
-  const previewAlt = data.name;
-  const previewCaption = data.name;
-  const modalPreviewImage = previewPopup.querySelector(".modal__preview-image");
-  const modalPreviewPictureCaption =
-    previewPopup.querySelector(".modal__caption");
-
-  //prettier-ignore
-  modalPreviewImage.setAttribute("src", previewLink);
-  //prettier-ignore
-  modalPreviewImage.setAttribute("alt", previewLink);
-  modalPreviewPictureCaption.textContent = data.name;
-
-  openPopup(previewPopup);
-}
-
-//cardstuff
-function getCardElement(data) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-  const cardName = data.name;
-  const cardText = cardElement.querySelector(".card__text");
-
-  const cardLink = data.link;
-  const altText = data.name;
-
-  const cardImage = cardElement.querySelector(".card__image");
-  cardImage.setAttribute("src", cardLink);
-  cardImage.setAttribute("alt", altText);
-
-  cardText.textContent = cardName;
-
-  const likeButton = cardElement.querySelector(".card__like");
-  const deleteButton = cardElement.querySelector(".card__delete");
-
-  //LIKING PICTURES
-  const handleLikeIcon = (evt) => {
-    evt.target.classList.toggle("card__like-active");
-  };
-  likeButton.addEventListener("click", handleLikeIcon);
-
-  //DELETING FUNCTION
-  function deleteCard(evt) {
-    evt.target.closest(".card").remove();
-  }
-
-  //REMOVING ELEMENT IN CARDS
-  deleteButton.addEventListener("click", deleteCard);
-
-  //SETTING PREVIEW LINK
-  cardImage.addEventListener("click", () => handlePreviewClick(data));
-
-  return cardElement;
-}
-
-*/
-
 closePreviewPopupButton.addEventListener("click", () =>
   closePopup(previewPopup)
 );
+//EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
+editWindow.addEventListener("submit", handleProfileSubmit);
 
 initialCards.forEach(function (cardElement) {
   const card = new Card(cardElement, cardSelector);
   cardsContainer.prepend(card.getElement());
 });
-
-/*
-const renderCard = (data, wrap) => {
-  const card = new Card(data, cardSelector);
-  wrap.append(card.getElement());
-};
-
-*/
-//APPEND TO CARDS CONTAINER
 
 //adding cards
 function addCard(evt) {
@@ -246,7 +177,7 @@ function addCard(evt) {
     link: linkInputField.value,
   };
   const card = new Card(createdCard, cardSelector);
-  cardsContainer.prepend(card.getElement);
+  cardsContainer.prepend(card.getElement());
   closePopup(addWindow);
   profileAddForm.reset();
   // toggleButtonState([titleInputField, linkInputField], createButton, config);
