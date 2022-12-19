@@ -95,7 +95,7 @@ function fillProfileForm() {
 }
 
 /*
-                      FUNCTIONS
+                      Template
 ############################################################
 */
 
@@ -104,6 +104,34 @@ const cardSelector = "#card__template";
                       FUNCTIONS
 ############################################################
 */
+
+//adding cards
+function addCard(evt) {
+  evt.preventDefault();
+
+  const createdCard = {
+    name: titleInputField.value,
+    link: linkInputField.value,
+  };
+  const card = new Card(createdCard, cardSelector);
+  cardsContainer.prepend(card.getElement());
+  closePopup(addWindow);
+  profileAddForm.reset();
+  // toggleButtonState([titleInputField, linkInputField], createButton, config);
+}
+
+const addForm = document.querySelector("#add-form");
+addForm.addEventListener("submit", addCard);
+
+const config = {
+  invalidInput: "modal__input-invalid",
+  activateError: "form__input-error_active",
+  formTypeError: "form__input_type_error",
+  inactiveButton: "modal__button-inactive",
+  modalInput: ".modal__input",
+  modalButton: ".modal__button",
+  modalForm: ".modal__form",
+};
 
 function closeModalEscape(evt) {
   if (evt.key === "Escape") {
@@ -122,9 +150,9 @@ function closeModalMouseDown(evt) {
 }
 
 //OPEN POPUP
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("modal__opened");
-  document.addEventListener("keydown", closeModalEscape);
+  document.addEventListener("keyup", closeModalEscape);
   popup.addEventListener("mousedown", closeModalMouseDown);
 }
 //Open popup event listener
@@ -163,41 +191,13 @@ closePreviewPopupButton.addEventListener("click", () =>
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
 editWindow.addEventListener("submit", handleProfileSubmit);
 
-initialCards.forEach(function (cardElement) {
-  const card = new Card(cardElement, cardSelector);
-  cardsContainer.prepend(card.getElement());
-});
-
-//adding cards
-function addCard(evt) {
-  evt.preventDefault();
-
-  const createdCard = {
-    name: titleInputField.value,
-    link: linkInputField.value,
-  };
-  const card = new Card(createdCard, cardSelector);
-  cardsContainer.prepend(card.getElement());
-  closePopup(addWindow);
-  profileAddForm.reset();
-  // toggleButtonState([titleInputField, linkInputField], createButton, config);
-}
-
-const addForm = document.querySelector("#add-form");
-addForm.addEventListener("submit", addCard);
-
-const config = {
-  invalidInput: "modal__input-invalid",
-  activateError: "form__input-error_active",
-  formTypeError: "form__input_type_error",
-  inactiveButton: "modal__button-inactive",
-  modalInput: ".modal__input",
-  modalButton: ".modal__button",
-  modalForm: ".modal__form",
-};
-
 const editFormValidator = new FormValidator(config, profileEditForm);
 const addFormValidator = new FormValidator(config, profileAddForm);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+
+initialCards.forEach(function (cardElement) {
+  const card = new Card(cardElement, cardSelector);
+  cardsContainer.prepend(card.getElement());
+});
