@@ -22,11 +22,16 @@ export function closeModalMouseDown(evt) {
 }
 
 //Open popup event listener
-openProfileEditorButton.addEventListener("click", () => {
-  fillProfileForm();
-  openPopup(editWindow);
-});
-addButton.addEventListener("click", () => openPopup(addWindow));
+export const editButtonListener = openProfileEditorButton.addEventListener(
+  "click",
+  () => {
+    fillProfileForm();
+    openPopup(editWindow);
+  }
+);
+export const addButtonListener = addButton.addEventListener("click", () =>
+  openPopup(addWindow)
+);
 
 //CLOSE POPUP
 export function closePopup(popup) {
@@ -35,10 +40,14 @@ export function closePopup(popup) {
   popup.removeEventListener("mousedown", closeModalMouseDown);
 }
 //CLOSE POPUP EVENT LISTENER
-closeProfileEditorButton.addEventListener("click", () =>
-  closePopup(editWindow)
+export const closeEditorListener = closeProfileEditorButton.addEventListener(
+  "click",
+  () => closePopup(editWindow)
 );
-closeAddPictureButton.addEventListener("click", () => closePopup(addWindow));
+export const closeAddListener = closeAddPictureButton.addEventListener(
+  "click",
+  () => closePopup(addWindow)
+);
 
 //editing profile submitsd
 export function handleProfileSubmit(evt) {
@@ -50,9 +59,12 @@ export function handleProfileSubmit(evt) {
   closePopup(editWindow);
 }
 
-//handle closing modal alternatives
-closePreviewPopupButton.addEventListener("click", () =>
-  closePopup(previewPopup)
+export const closePreview = closePreviewPopupButton.addEventListener(
+  "click",
+  () => closePopup(previewPopup)
 );
 //EVENT LISTENER FOR SUBMITTING PROFILE CHANGES
-editWindow.addEventListener("submit", handleProfileSubmit);
+export const submitListener = editWindow.addEventListener(
+  "submit",
+  handleProfileSubmit
+);
