@@ -1,4 +1,65 @@
-//OPEN POPUP
+/*
+                      POPUPS
+############################################################
+*/
+
+const editWindow = document.querySelector("#edit");
+
+const addWindow = document.querySelector("#add");
+
+const profileAddForm = document.querySelector("#add-form");
+
+const profileEditForm = document.querySelector("#edit-form");
+
+const previewPopup = document.querySelector("#preview");
+
+/*
+                      BUTTONS
+############################################################
+*/
+
+const openProfileEditorButton = document.querySelector(".profile__edit");
+const closeProfileEditorButton = document.querySelector("#edit-close");
+
+const addButton = document.querySelector(".profile__add");
+
+const closeAddPictureButton = document.querySelector(".js-close");
+
+const createButton = document.querySelector("#create-btn");
+
+const closePreviewPopupButton = previewPopup.querySelector("#preview-close");
+
+/*
+                      INPUTS
+############################################################
+*/
+
+const jobInputField = document.querySelector("#subtitle");
+
+const nameInputField = document.querySelector(".modal__input");
+
+const titleInputField = document.querySelector("#title");
+
+const linkInputField = document.querySelector("#link");
+
+/*
+                      SETTING TEXT VALUES
+############################################################
+*/
+const profileName = document.querySelector(".profile__name");
+const subtitleName = document.querySelector(".profile__subtitle");
+
+/*
+                      Template
+############################################################
+*/
+
+const cardSelector = "#card__template";
+/*
+                      FUNCTIONS
+############################################################
+*/
+
 export function openPopup(popup) {
   popup.classList.add("modal__opened");
   document.addEventListener("keyup", closeModalEscape);
@@ -19,6 +80,10 @@ export function closeModalMouseDown(evt) {
     console.log("lol");
     closePopup(evt.target);
   }
+}
+export function fillProfileForm() {
+  nameInputField.setAttribute("value", profileName.textContent);
+  jobInputField.setAttribute("value", subtitleName.textContent);
 }
 
 //Open popup event listener

@@ -7,8 +7,10 @@ import {
   editButtonListener,
   closePopup,
   closeEditorListener,
+  addButtonListener,
   closeAddListener,
   handleProfileSubmit,
+  fillProfileForm,
   closePreview,
   submitListener,
 } from "./utils.js";
@@ -101,11 +103,6 @@ const linkInputField = document.querySelector("#link");
 const profileName = document.querySelector(".profile__name");
 const subtitleName = document.querySelector(".profile__subtitle");
 
-function fillProfileForm() {
-  nameInputField.setAttribute("value", profileName.textContent);
-  jobInputField.setAttribute("value", subtitleName.textContent);
-}
-
 /*
                       Template
 ############################################################
@@ -117,13 +114,10 @@ const cardSelector = "#card__template";
 ############################################################
 */
 
-closeModalEscape(evt);
-closeModalMouseDown(evt);
 editButtonListener;
 addButtonListener;
 closeEditorListener;
 closeAddListener;
-handleProfileSubmit(evt);
 closePreview;
 submitListener;
 
