@@ -100,9 +100,13 @@ export const addButtonListener = addButton.addEventListener("click", () =>
 
 //CLOSE POPUP
 export function closePopup(popup) {
-  popup.classList.remove("modal__opened");
-  document.removeEventListener("keydown", closeModalEscape);
-  popup.removeEventListener("mousedown", closeModalMouseDown);
+  if (popup === null) {
+    //pass
+  } else {
+    popup.classList.remove("modal__opened");
+    document.removeEventListener("keydown", closeModalEscape);
+    popup.removeEventListener("mousedown", closeModalMouseDown);
+  }
 }
 //CLOSE POPUP EVENT LISTENER
 export const closeEditorListener = closeProfileEditorButton.addEventListener(
