@@ -32,7 +32,7 @@ class Card {
       ".modal__preview-image"
     );
 
-    let modalPreviewPictureCaption = previewAlt;
+    const modalPreviewPictureCaption = previewAlt;
 
     //prettier-ignore
     modalPreviewImage.setAttribute("src", previewLink);
@@ -56,7 +56,8 @@ class Card {
 
     this._setEventListeners();
 
-    this._element.querySelector(".card__image").src = `${this._link}`;
+    this._cardImage.src = `${this._link}`;
+    this._cardImage.alt = `${this._link}`;
     this._element.querySelector(".card__text").textContent = this._name;
 
     return this._element;

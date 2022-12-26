@@ -4,15 +4,7 @@ import {
   openPopup,
   closeModalEscape,
   closeModalMouseDown,
-  editButtonListener,
   closePopup,
-  closeEditorListener,
-  addButtonListener,
-  closeAddListener,
-  handleProfileSubmit,
-  fillProfileForm,
-  closePreview,
-  submitListener,
 } from "./utils.js";
 
 /*
@@ -114,25 +106,66 @@ const cardSelector = "#card__template";
 ############################################################
 */
 
-editButtonListener;
-addButtonListener;
-closeEditorListener;
-closeAddListener;
-closePreview;
-submitListener;
+//Open popup event listener
+export const editButtonListener = openProfileEditorButton.addEventListener(
+  "click",
+  () => {
+    fillProfileForm();
+    openPopup(editWindow);
+  }
+);
+export const addButtonListener = addButton.addEventListener("click", () =>
+  openPopup(addWindow)
+);
+
+const submitListener = editWindow.addEventListener(
+  "submit",
+  handleProfileSubmit
+);
+
+// find all close buttons
+const closeButtons = document.querySelectorAll(".modal__close");
+
+closeButtons.forEach((button) => {
+  // find the closest popup
+  const popup = button.closest(".modal");
+  // set the listener
+  button.addEventListener("click", () => closePopup(popup));
+});
+
+function fillProfileForm() {
+  nameInputField.setAttribute("value", profileName.textContent);
+  jobInputField.setAttribute("value", subtitleName.textContent);
+}
 
 //adding cards
-function addCard(evt) {
-  evt.preventDefault();
 
+function createCard() {
   const createdCard = {
     name: titleInputField.value,
     link: linkInputField.value,
   };
   const card = new Card(createdCard, cardSelector);
-  cardsContainer.prepend(card.getElement());
+  return card;
+}
+
+//editing profile submitsd
+function handleProfileSubmit(evt) {
+  evt.preventDefault();
+
+  profileName.textContent = nameInputField.value;
+
+  subtitleName.textContent = jobInputField.value;
+  closePopup(editWindow);
+}
+
+function addCard(evt) {
+  evt.preventDefault();
+
+  cardsContainer.prepend(createCard().getElement());
   closePopup(addWindow);
   profileAddForm.reset();
+  addFormValidator.resetValidation();
   // toggleButtonState([titleInputField, linkInputField], createButton, config);
 }
 

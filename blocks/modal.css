@@ -26,7 +26,7 @@
   max-height: 75vh;
   position: relative;
 }
-.modal__opened {
+.modal_opened {
   visibility: visible;
   opacity: 1;
   transition: visibility 0.5s, opacity 0.5s linear;
