@@ -31,7 +31,7 @@ export function closePopup(popup) {
     //pass
   } else {
     popup.classList.remove("modal_opened");
-    document.removeEventListener("keydown", closeModalEscape);
+    document.removeEventListener("keyup", closeModalEscape);
     popup.removeEventListener("mousedown", closeModalMouseDown);
   }
 }
