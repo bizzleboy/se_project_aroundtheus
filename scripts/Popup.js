@@ -4,28 +4,32 @@ export default class Popup {
   }
   open() {
     this._selector.classList.add("modal_opened");
-    this._selector.addEventListener("keyup", closeModalEscape);
-    this._selector.addEventListener("mousedown", closeModalMouseDown);
   }
   close() {
-    console.log("hi");
     if (this._selector === null) {
       //pass
+      console.log("a");
     } else {
       this._selector.classList.remove("modal_opened");
-      document.removeEventListener("keyup", closeModalEscape);
-      this._selector.removeEventListener("mousedown", closeModalMouseDown);
+      // document.removeEventListener("keyup", closeModalEscape);
+      // this._selector.removeEventListener("mousedown", closeModalMouseDown);
     }
   }
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      this.close();
+      console.log("hi");
+      console.log(this._selector);
+      this._selector.close();
     }
   }
   setEventListeners() {
     const closeButton = this._selector.querySelector(".modal__close");
+    console.log(this._selector);
+    const openedModal = this._selector.querySelector(".modal_opened");
+    document.addEventListener("keyup", this._handleEscClose);
     closeButton.addEventListener("click", () => {
       this.close();
+      //document.removeEventListener("keydown");
     });
   }
 }

@@ -23,7 +23,7 @@ class Card {
 
   _handlePreviewClick() {
     this._preview = document.querySelector("#preview");
-    console.log(this._preview);
+
     const previewLink = this._link;
     const previewAlt = this._name;
 
