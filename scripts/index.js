@@ -1,13 +1,11 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import {
-  openPopup,
-  closeModalEscape,
-  closeModalMouseDown,
-  closePopup,
-} from "./utils.js";
+import { openPopup, closePopup } from "./utils.js";
 
 import PopupWithForm from "./PopupWithForm.js";
+import Section from "./Section.js";
+import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 /*
 Cards
@@ -45,7 +43,6 @@ const card6 = {
 const initialCards = [card1, card2, card3, card4, card5, card6];
 
 const cardsContainer = document.querySelector(".cards");
-const cardTemplate = document.querySelector("#card__template").content;
 /*
                       POPUPS
 ############################################################
@@ -59,23 +56,14 @@ const profileAddForm = document.querySelector("#add-form");
 
 const profileEditForm = document.querySelector("#edit-form");
 
-const previewPopup = document.querySelector("#preview");
-
 /*
                       BUTTONS
 ############################################################
 */
 
 const openProfileEditorButton = document.querySelector(".profile__edit");
-const closeProfileEditorButton = document.querySelector("#edit-close");
 
 const addButton = document.querySelector(".profile__add");
-
-const closeAddPictureButton = document.querySelector(".js-close");
-
-const createButton = document.querySelector("#create-btn");
-
-const closePreviewPopupButton = previewPopup.querySelector("#preview-close");
 
 /*
                       INPUTS
@@ -120,20 +108,15 @@ export const addButtonListener = addButton.addEventListener("click", () =>
   openPopup(addWindow)
 );
 
-const submitListener = editWindow.addEventListener(
-  "submit",
-  handleProfileSubmit
-);
-
 // find all close buttons
 const closeButtons = document.querySelectorAll(".modal__close");
 
-closeButtons.forEach((button) => {
-  // find the closest popup
-  const popup = button.closest(".modal");
-  // set the listener
-  button.addEventListener("click", () => closePopup(popup));
-});
+// closeButtons.forEach((button) => {
+//   // find the closest popup
+//   const popup = button.closest(".modal");
+//   // set the listener
+//   button.addEventListener("click", () => closePopup(popup));
+// });
 
 function fillProfileForm() {
   nameInputField.setAttribute("value", profileName.textContent);
@@ -149,16 +132,6 @@ function createCard() {
   };
   const card = new Card(createdCard, cardSelector);
   return card;
-}
-
-//editing profile submitsd
-function handleProfileSubmit(evt) {
-  evt.preventDefault();
-
-  profileName.textContent = nameInputField.value;
-
-  subtitleName.textContent = jobInputField.value;
-  closePopup(editWindow);
 }
 
 function addCard(evt) {
@@ -195,4 +168,31 @@ initialCards.forEach(function (cardElement) {
   cardsContainer.prepend(card.getElement());
 });
 
-new PopupWithForm("#edit", () => {});
+// //editing profile submitsd
+// function handleProfileSubmit(evt) {
+//   evt.preventDefault();
+
+//   profileName.textContent = nameInputField.value;
+
+//   subtitleName.textContent = jobInputField.value;
+//   closePopup(editWindow);
+// }
+
+const editForm = new PopupWithForm("#edit", (evt) => {
+  console.log("help");
+  evt.preventDefault();
+  profileName.textContent = nameInputField.value;
+
+  subtitleName.textContent = jobInputField.value;
+  editForm.close();
+});
+
+editForm;
+
+const imagePreview = new PopupWithImage("#preview");
+imagePreview.setEventListeners();
+
+// const addPopup = new Popup({ selector: "#add" });
+// const editPopup = new Popup({ selector: "#edit" });
+
+console.log(editForm);

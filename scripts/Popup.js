@@ -8,6 +8,7 @@ export default class Popup {
     this._selector.addEventListener("mousedown", closeModalMouseDown);
   }
   close() {
+    console.log("hi");
     if (this._selector === null) {
       //pass
     } else {
@@ -18,14 +19,13 @@ export default class Popup {
   }
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      // search for an opened modal
-      const openedModal = document.querySelector(".modal_opened");
-      // close it
-      closePopup(openedModal);
+      this.close();
     }
   }
   setEventListeners() {
     const closeButton = this._selector.querySelector(".modal__close");
-    // closeButton.addEventListener("click", )
+    closeButton.addEventListener("click", () => {
+      this.close();
+    });
   }
 }
