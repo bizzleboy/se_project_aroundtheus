@@ -7,6 +7,8 @@ import {
   closePopup,
 } from "./utils.js";
 
+import PopupWithForm from "./PopupWithForm.js";
+
 /*
 Cards
 ############################################################
@@ -192,3 +194,5 @@ initialCards.forEach(function (cardElement) {
   const card = new Card(cardElement, cardSelector);
   cardsContainer.prepend(card.getElement());
 });
+
+new PopupWithForm("#edit", () => {});

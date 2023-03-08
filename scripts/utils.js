@@ -20,7 +20,6 @@ export function closeModalEscape(evt) {
 
 export function closeModalMouseDown(evt) {
   if (evt.target === evt.currentTarget) {
-    console.log("lol");
     closePopup(evt.target);
   }
 }
