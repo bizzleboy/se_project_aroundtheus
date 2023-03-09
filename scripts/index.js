@@ -6,6 +6,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import Section from "./Section.js";
 
 import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
 
 /*
 Cards
@@ -119,10 +120,14 @@ const addFormValidator = new FormValidator(config, profileAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-const editForm = new PopupWithForm("#edit", () => {
-  profileName.textContent = nameInputField.value;
+const userInfo = new UserInfo({
+  userName: ".profile__name",
+  userJob: ".profile__subtitle",
+});
 
-  subtitleName.textContent = jobInputField.value;
+const editForm = new PopupWithForm("#edit", () => {
+  userInfo.setUserInfo(nameInputField.value, jobInputField.value);
+
   editForm.close();
 });
 
