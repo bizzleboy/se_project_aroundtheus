@@ -126,25 +126,40 @@ const editForm = new PopupWithForm("#edit", () => {
   editForm.close();
 });
 
+const previewForm = new PopupWithForm("#preview", () => {
+  previewForm.close();
+});
+
 const addForm = new PopupWithForm("#add", () => {
   const createdCard = {
     name: titleInputField.value,
     link: linkInputField.value,
   };
-  const card = new Card(createdCard, cardSelector);
+
+  const card = createCard(createdCard);
   cardsContainer.prepend(card.getElement());
   addForm.close();
 });
+
 addForm.setEventListeners();
 editForm.setEventListeners();
+
 const imagePreview = new PopupWithImage("#preview");
 imagePreview.setEventListeners();
+
+function createCard(data) {
+  return new Card(data, cardSelector, {
+    handleImageClick: (name, link) => {
+      imagePreview.open(name, link);
+    },
+  });
+}
 
 const cardSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const cardElement = new Card(item, cardSelector);
+      const cardElement = createCard(item);
 
       cardsContainer.prepend(cardElement.getElement());
     },

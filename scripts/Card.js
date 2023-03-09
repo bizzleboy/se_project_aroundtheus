@@ -1,16 +1,19 @@
 import { openPopup } from "./utils.js";
 
 class Card {
-  constructor(data, selector) {
+  constructor(data, selector, { handleImageClick }) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._handleImageClick = handleImageClick;
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", this._handleLikeIcon.bind(this));
     this._deleteButton.addEventListener("click", this._deleteCard.bind(this));
-    this._cardImage.addEventListener("click", () => this._handlePreviewClick());
+    this._cardImage.addEventListener("click", () =>
+      this._handleImageClick(this._name, this._link)
+    );
   }
 
   _handleLikeIcon() {
@@ -40,7 +43,7 @@ class Card {
     modalPreviewImage.setAttribute("alt", previewAlt);
     this._preview.querySelector(".modal__caption").textContent = this._name;
 
-    openPopup(this._preview);
+    this._preview.classList.add("modal_opened");
   }
 
   _getTemplate() {
