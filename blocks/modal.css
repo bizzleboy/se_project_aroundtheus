@@ -63,6 +63,7 @@
   top: 50%;
   margin-top: -282px;
   margin-left: -282px;
+  z-index: 100;
 }
 
 .modal__form {

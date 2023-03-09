@@ -23,7 +23,8 @@ export default class Popup {
   }
 
   _handleOverlayClick(evt) {
-    if (evt.target === evt.currentTarget) {
+    console.log(evt.target);
+    if (evt.target.classList.contains("modal")) {
       console.log(evt);
       this.close();
     }
@@ -33,9 +34,8 @@ export default class Popup {
     closeButton.addEventListener("click", () => {
       this.close();
     });
-    this._selector.addEventListener("mousedown", () => {
-      console.log("hi");
-      this._handleOverlayClick;
+    this._selector.addEventListener("mousedown", (evt) => {
+      this._handleOverlayClick(evt);
     });
   }
 }
