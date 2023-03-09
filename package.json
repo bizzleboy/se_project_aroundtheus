@@ -1,0 +1,27 @@
+{
+  "name": "se_project_aroundtheus",
+  "version": "1.0.0",
+  "description": "### Technology Utilized",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bizzleboy/se_project_aroundtheus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bizzleboy/se_project_aroundtheus/issues"
+  },
+  "homepage": "https://github.com/bizzleboy/se_project_aroundtheus#readme",
+  "dependencies": {
+    "webpack": "^5.76.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "4.9.3"
+  }
+}
