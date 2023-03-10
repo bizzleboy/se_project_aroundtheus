@@ -7,38 +7,72 @@ import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import UserInfo from "./UserInfo.js";
 
+import "./index.css";
+
+/*
+Webpack image import thingys
+############################################################
+*/
+import logo from "./images/aroundUS.svg";
+import pp from "./images/jacques-cousteau.jpg";
+import close from "./images/CloseIcon.svg";
+
+const logoImage = document.getElementById("logo");
+console.log(logoImage);
+
+logoImage.src = logo;
+
+const profilePicture = document.getElementById("profpic");
+profilePicture.src = pp;
+
+const closePreview = document.getElementById("preview-close");
+closePreview.src = close;
+
+const closeEdit = document.getElementById("edit-close");
+closeEdit.src = close;
+
+const closeAdd = document.getElementById("add-close");
+closeAdd.src = close;
+
 /*
 Cards
 ############################################################
 */
+import yose from "./images/yosemite-valley.jpg";
+import lake from "./images/lake-louise.png";
+import bald from "./images/bald-mountains.png";
+import latemar from "./images/latemar.png";
+import nat from "./images/vanoise-national-park.png";
+import lago from "./images/lago-di-braies.png";
+
 const card1 = {
   name: "Yosemite Valley",
-  link: "./images/yosemite-valley.jpg",
+  link: yose,
 };
 
 const card2 = {
   name: "Lake Louise",
-  link: "./images/lake-louise.png",
+  link: lake,
 };
 
 const card3 = {
   name: "Bald Mountains",
-  link: "./images/bald-mountains.png",
+  link: bald,
 };
 
 const card4 = {
   name: "Latemar",
-  link: "./images/latemar.png",
+  link: latemar,
 };
 
 const card5 = {
   name: "Vanoise National Park",
-  link: "./images/vanoise-national-park.png",
+  link: nat,
 };
 
 const card6 = {
   name: "Lago Di Braies",
-  link: "./images/lago-di-braies.png",
+  link: lago,
 };
 const initialCards = [card1, card2, card3, card4, card5, card6];
 

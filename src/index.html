@@ -12,18 +12,20 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/aroundUS.svg"
+          src="<%=require('./images/aroundUS.svg')%>"
           alt="around the US logo"
           class="header__logo"
+          id="logo"
         />
       </header>
       <main class="main">
         <section class="profile">
           <div class="profile__info">
             <img
-              src="./images/jacques-cousteau.jpg"
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
               alt="a pic of jacque whats it to ya"
               class="profile__picture"
+              id="profpic"
             />
 
             <div class="profile__text">
@@ -85,7 +87,7 @@
         <div class="modal__container">
           <button
             type="button"
-            src="./images/CloseIcon.svg"
+            src="<%=require('./images/CloseIcon.svg')%>"
             class="modal__close"
             id="edit-close"
           ></button>
@@ -127,8 +129,9 @@
         <div class="modal__container">
           <button
             type="button"
-            src="./images/CloseIcon.svg"
+            src="<%=require('./images/CloseIcon.svg')%>"
             class="modal__close js-close"
+            id="add-close"
           ></button>
           <form class="modal__form" id="add-form">
             <fieldset class="modal__fieldset">
@@ -166,8 +169,5 @@
         </div>
       </div>
     </div>
-
-    <script type="module" src="./scripts/index.js"></script>
-    <!-- <script src="./scripts/validate.js"></script>-->
   </body>
 </html>
