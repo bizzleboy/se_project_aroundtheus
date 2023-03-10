@@ -18,7 +18,6 @@ import pp from "./images/jacques-cousteau.jpg";
 import close from "./images/CloseIcon.svg";
 
 const logoImage = document.getElementById("logo");
-console.log(logoImage);
 
 logoImage.src = logo;
 

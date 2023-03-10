@@ -23,9 +23,7 @@ export default class Popup {
   }
 
   _handleOverlayClick(evt) {
-    console.log(evt.target);
     if (evt.target.classList.contains("modal")) {
-      console.log(evt);
       this.close();
     }
   }
