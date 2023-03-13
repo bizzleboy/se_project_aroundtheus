@@ -1,28 +1,28 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
-import PopupWithForm from "./PopupWithForm.js";
-import Section from "./Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
 
-import PopupWithImage from "./PopupWithImage.js";
-import UserInfo from "./UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 
-import "./index.css";
+import "../pages/index.css";
 
 /*
 Webpack image import thingys
 ############################################################
 */
-import logo from "./images/aroundUS.svg";
-import pp from "./images/jacques-cousteau.jpg";
-import close from "./images/CloseIcon.svg";
+import logo from "../images/aroundUS.svg";
+import avatarImage from "../images/jacques-cousteau.jpg";
+import close from "../images/CloseIcon.svg";
 
 const logoImage = document.getElementById("logo");
 
 logoImage.src = logo;
 
 const profilePicture = document.getElementById("profpic");
-profilePicture.src = pp;
+profilePicture.src = avatarImage;
 
 const closePreview = document.getElementById("preview-close");
 closePreview.src = close;
@@ -37,12 +37,12 @@ closeAdd.src = close;
 Cards
 ############################################################
 */
-import yose from "./images/yosemite-valley.jpg";
-import lake from "./images/lake-louise.png";
-import bald from "./images/bald-mountains.png";
-import latemar from "./images/latemar.png";
-import nat from "./images/vanoise-national-park.png";
-import lago from "./images/lago-di-braies.png";
+import yose from "../images/yosemite-valley.jpg";
+import lake from "../images/lake-louise.png";
+import bald from "../images/bald-mountains.png";
+import latemar from "../images/latemar.png";
+import nat from "../images/vanoise-national-park.png";
+import lago from "../images/lago-di-braies.png";
 
 const card1 = {
   name: "Yosemite Valley",
@@ -80,10 +80,6 @@ const cardsContainer = document.querySelector(".cards");
                       POPUPS
 ############################################################
 */
-
-const editWindow = document.querySelector("#edit");
-
-const addWindow = document.querySelector("#add");
 
 const profileAddForm = document.querySelector("#add-form");
 
@@ -129,9 +125,15 @@ const cardSelector = "#card__template";
 ############################################################
 */
 
+const userInfo = new UserInfo({
+  userName: ".profile__name",
+  userJob: ".profile__subtitle",
+});
+
 function fillProfileForm() {
-  nameInputField.setAttribute("value", profileName.textContent);
-  jobInputField.setAttribute("value", subtitleName.textContent);
+  const { name, job } = userInfo.getUserInfo();
+  nameInputField.setAttribute("value", name);
+  jobInputField.setAttribute("value", job);
 }
 
 fillProfileForm();
@@ -152,29 +154,29 @@ const addFormValidator = new FormValidator(config, profileAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-const userInfo = new UserInfo({
-  userName: ".profile__name",
-  userJob: ".profile__subtitle",
-});
+const editForm = new PopupWithForm("#edit", (data) => {
+  const inputs = editForm._getInputValues();
 
-const editForm = new PopupWithForm("#edit", () => {
-  userInfo.setUserInfo(nameInputField.value, jobInputField.value);
+  data.name = inputs.name;
+  data.subtitle = inputs.subtitle;
+  userInfo.setUserInfo(data.name, data.subtitle);
 
   editForm.close();
 });
 
-const previewForm = new PopupWithForm("#preview", () => {
-  previewForm.close();
-});
+const addForm = new PopupWithForm("#add", (data) => {
+  const inputs = editForm._getInputValues();
+  data.title = inputs.title;
+  data.link = inputs.link;
 
-const addForm = new PopupWithForm("#add", () => {
   const createdCard = {
-    name: titleInputField.value,
-    link: linkInputField.value,
+    name: data.title,
+    link: data.link,
   };
 
   const card = createCard(createdCard);
-  cardsContainer.prepend(card.getElement());
+  cardsContainer.prepend(card);
+  cardSection.addItem(card);
   addForm.close();
 });
 
@@ -189,7 +191,7 @@ function createCard(data) {
     handleImageClick: (name, link) => {
       imagePreview.open(name, link);
     },
-  });
+  }).getElement();
 }
 
 const cardSection = new Section(
@@ -198,7 +200,8 @@ const cardSection = new Section(
     renderer: (item) => {
       const cardElement = createCard(item);
 
-      cardsContainer.prepend(cardElement.getElement());
+      cardsContainer.prepend(cardElement);
+      cardSection.addItem(cardElement);
     },
   },
   ".cards"

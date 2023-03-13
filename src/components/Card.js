@@ -2,7 +2,7 @@ class Card {
   constructor(data, selector, { handleImageClick }) {
     this._name = data.name;
     this._link = data.link;
-    this._selector = selector;
+    this._popUpElement = selector;
     this._handleImageClick = handleImageClick;
   }
 
@@ -19,34 +19,15 @@ class Card {
   }
 
   _deleteCard() {
-    this._deleteButton.closest(".card").remove();
-  }
-
-  _handlePreviewClick() {
-    this._preview = document.querySelector("#preview");
-
-    const previewLink = this._link;
-    const previewAlt = this._name;
-
-    const previewCaption = this._name;
-    const modalPreviewImage = this._preview.querySelector(
-      ".modal__preview-image"
-    );
-
-    const modalPreviewPictureCaption = previewAlt;
-
-    //prettier-ignore
-    modalPreviewImage.setAttribute("src", previewLink);
-    //prettier-ignore
-    modalPreviewImage.setAttribute("alt", previewAlt);
-    this._preview.querySelector(".modal__caption").textContent = this._name;
-
-    this._preview.classList.add("modal_opened");
+    this._element.remove();
+    this._element = null;
   }
 
   _getTemplate() {
-    //prettier-ignore
-    return document.querySelector(this._selector).content.querySelector(".card").cloneNode(true);
+    return document
+      .querySelector(this._popUpElement)
+      .content.querySelector(".card")
+      .cloneNode(true);
   }
   getElement() {
     this._element = this._getTemplate();
@@ -57,8 +38,8 @@ class Card {
 
     this._setEventListeners();
 
-    this._cardImage.src = `${this._link}`;
-    this._cardImage.alt = `${this._link}`;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = "photo of " + this._name;
     this._element.querySelector(".card__text").textContent = this._name;
 
     return this._element;
