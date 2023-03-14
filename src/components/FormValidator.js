@@ -56,9 +56,9 @@ class FormValidator {
   }
 
   _setEventListeners() {
-    //prettier-ignore
-
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._modalInput));
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._modalInput)
+    );
     this._buttonElement = this._formElement.querySelector(this._modalButton);
 
     this._inputList.forEach((inputElement) => {

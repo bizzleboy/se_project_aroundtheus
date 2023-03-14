@@ -4,19 +4,12 @@ export default class Popup {
   }
   open() {
     this._popUpElement.classList.add("modal_opened");
-    if (this._popUpElement.classList.contains("modal_opened")) {
-      document.addEventListener("keyup", (event) =>
-        this._handleEscClose(event)
-      );
-    } else {
-      document.removeEventListener("keyup", this._handleEscClose);
-    }
+
+    document.addEventListener("keyup", (event) => this._handleEscClose(event));
   }
   close() {
     this._popUpElement.classList.remove("modal_opened");
-    document.removeEventListener("keyup", (event) =>
-      this._handleEscClose(event)
-    );
+    document.removeEventListener("keyup", this._handleEscClose);
   }
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {

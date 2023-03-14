@@ -132,12 +132,11 @@ const userInfo = new UserInfo({
 
 function fillProfileForm() {
   const { name, job } = userInfo.getUserInfo();
+
   nameInputField.setAttribute("value", name);
   jobInputField.setAttribute("value", job);
 }
-
 fillProfileForm();
-
 const config = {
   invalidInput: "modal__input-invalid",
   activateError: "form__input-error_active",
@@ -155,27 +154,19 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 const editForm = new PopupWithForm("#edit", (data) => {
-  const inputs = editForm._getInputValues();
-
-  data.name = inputs.name;
-  data.subtitle = inputs.subtitle;
   userInfo.setUserInfo(data.name, data.subtitle);
 
   editForm.close();
 });
 
 const addForm = new PopupWithForm("#add", (data) => {
-  const inputs = editForm._getInputValues();
-  data.title = inputs.title;
-  data.link = inputs.link;
-
   const createdCard = {
     name: data.title,
     link: data.link,
   };
 
   const card = createCard(createdCard);
-  cardsContainer.prepend(card);
+
   cardSection.addItem(card);
   addForm.close();
 });
@@ -200,7 +191,6 @@ const cardSection = new Section(
     renderer: (item) => {
       const cardElement = createCard(item);
 
-      cardsContainer.prepend(cardElement);
       cardSection.addItem(cardElement);
     },
   },
@@ -211,9 +201,13 @@ cardSection.renderItems();
 
 //Open popup event listener
 openProfileEditorButton.addEventListener("click", () => {
+  editFormValidator.resetValidation();
+  fillProfileForm();
+
   editForm.open();
 });
 
 addButton.addEventListener("click", () => {
+  addFormValidator.resetValidation();
   addForm.open();
 });
