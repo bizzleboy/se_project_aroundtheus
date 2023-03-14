@@ -136,7 +136,7 @@ function fillProfileForm() {
   nameInputField.setAttribute("value", name);
   jobInputField.setAttribute("value", job);
 }
-fillProfileForm();
+
 const config = {
   invalidInput: "modal__input-invalid",
   activateError: "form__input-error_active",
