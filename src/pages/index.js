@@ -7,7 +7,24 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 
+import Api from "../components/Api";
+
 import "../pages/index.css";
+
+/*
+API STUFF
+################################
+*/
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "f32abe83-9303-4a0e-8720-b7e30a51f2e5",
+    "Content-Type": "application/json",
+  },
+});
+
+console.log(api);
 
 /*
 Webpack image import thingys
