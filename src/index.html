@@ -20,7 +20,6 @@
         <section class="profile">
           <div class="profile__info">
             <img
-              src="<%=require('./images/jacques-cousteau.jpg')%>"
               alt="a pic of jacque whats it to ya"
               class="profile__picture"
               id="profpic"
@@ -55,15 +54,70 @@
               <img class="card__image" alt="yoseite" src="#" />
               <div class="card__info">
                 <h2 class="card__text">Sample</h2>
-                <button
-                  class="card__like"
-                  type="button"
-                  aria-label="like button"
-                ></button>
+                <div class="card__like-container">
+                  <button
+                    class="card__like"
+                    type="button"
+                    aria-label="like button"
+                  ></button>
+                  <span class="card__like-count"></span>
+                </div>
               </div>
             </div>
           </template>
         </section>
+
+        <div class="modal" id="change-avatar">
+          <div class="modal__container">
+            <button
+              type="button"
+              src="<%=require('./images/CloseIcon.svg')%>"
+              class="modal__close"
+              id="avatar-close"
+            ></button>
+            <form class="modal__form" id="avatar-form">
+              <fieldset class="modal__fieldset">
+                <h2 class="modal__heading">Change profile picture</h2>
+                <label for="avatar-url" class="modal__label">
+                  <input
+                    class="modal__input"
+                    id="avatar-url"
+                    placeholder="Image URL"
+                    required
+                    type="url"
+                    name="avatar"
+                  />
+                  <span class="modal__input-error avatar-url-error"></span>
+                </label>
+              </fieldset>
+              <fieldset class="modal__fieldset">
+                <button
+                  class="modal__button"
+                  id="avatar-save-btn"
+                  type="submit"
+                >
+                  Save
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <div class="modal modal_type_delete" id="delete">
+          <div class="modal__content">
+            <h2 class="modal__title">Are you sure?</h2>
+            <form class="modal__form" id="delete-form">
+              <button class="modal__button modal__button_delete" type="submit">
+                Yes
+              </button>
+            </form>
+            <button
+              class="modal__close"
+              id="delete-close"
+              type="button"
+            ></button>
+          </div>
+        </div>
 
         <div class="modal" id="preview">
           <div class="modal__preview">
@@ -123,6 +177,7 @@
           </form>
         </div>
       </div>
+
       <div class="modal" id="add">
         <div class="modal__container">
           <button

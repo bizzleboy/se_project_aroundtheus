@@ -34,6 +34,21 @@
   overflow: hidden;
 }
 
+.card__like-count {
+  align-self: center;
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 3px;
+}
+.card__like-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 22px;
+  margin-right: 15px;
+  margin-left: auto;
+}
+
 .card__like {
   background-image: url("../images/heart.svg");
   width: 21px;
@@ -43,9 +58,7 @@
   border-style: none;
   background-color: transparent;
   align-self: center;
-  margin-left: auto;
-  margin-right: 20px;
-  margin-top: 31px;
+
   transition-timing-function: ease-in;
   transition-duration: 0.1s;
   cursor: pointer;
