@@ -198,6 +198,7 @@ const avatarForm = document.querySelector("#avatar-form");
 
 const avatarFormValidator = new FormValidator(config, avatarForm);
 avatarFormValidator.enableValidation();
+
 profilePicture.addEventListener("click", () => {
   avatarFormValidator.resetValidation();
   changeAvatarPopup.open();
@@ -232,8 +233,10 @@ const addForm = new PopupWithForm("#add", (data) => {
   api
     .addCard(data.title, data.link)
     .then((createdCardData) => {
-      const cardElement = createCard(createdCardData);
-      cardSection.addItem(cardElement);
+      return createCard(createdCardData); // Return the promise here
+    })
+    .then((cardElement) => {
+      cardSection.addItem(cardElement); // Add the card to the DOM after the image has been preloaded
       addForm.close();
     })
     .catch((err) => {
