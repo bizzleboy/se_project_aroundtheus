@@ -66,7 +66,9 @@
   z-index: 100;
 }
 
-.modal__form {
+.modal__content {
+  background-color: white;
+  border-radius: 10px;
 }
 
 .modal__heading {
@@ -122,16 +124,35 @@
   color: red;
 }
 
+.modal__content {
+  width: 430px;
+  height: 181px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal__title {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  margin-left: 36px;
+  margin-top: 34px;
+  width: 358px;
+  height: 23px;
+}
 .modal__button {
   width: 358px;
   height: 50px;
   background-color: black;
   color: white;
+  margin-bottom: 36px;
 
   margin-top: 48px;
   border-radius: 2px;
   cursor: pointer;
   border: none;
+  align-self: center;
 }
 
 .modal__button:hover {
@@ -182,4 +203,8 @@
     bottom: 26px;
     background-size: 26px 26px;
   }
+}
+
+.avatar__container {
+  height: 272px;
 }

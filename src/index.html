@@ -19,12 +19,19 @@
       <main class="main">
         <section class="profile">
           <div class="profile__info">
-            <img
-              alt="a pic of jacque whats it to ya"
-              class="profile__picture"
-              id="profpic"
-            />
-
+            <div class="profile__picture-wrapper">
+              <img
+                alt="a pic of jacque whats it to ya"
+                class="profile__picture"
+                id="profpic"
+              />
+              <div class="profile__overlay"></div>
+              <img
+                src="<%=require('./images/pencil.svg')%>"
+                alt="Edit"
+                class="profile__edit-icon"
+              />
+            </div>
             <div class="profile__text">
               <div class="profile__title">
                 <h1 class="profile__name">Jacques Cousteau</h1>
@@ -68,7 +75,7 @@
         </section>
 
         <div class="modal" id="change-avatar">
-          <div class="modal__container">
+          <div class="avatar__container modal__container">
             <button
               type="button"
               src="<%=require('./images/CloseIcon.svg')%>"

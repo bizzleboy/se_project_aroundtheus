@@ -144,6 +144,8 @@ const cardSelector = "#card__template";
 */
 
 const changeAvatarPopup = new PopupWithForm("#change-avatar", (data) => {
+  changeAvatarPopup.renderLoading(true);
+
   api
     .updateAvatar(data.avatar)
     .then((result) => {
@@ -152,6 +154,9 @@ const changeAvatarPopup = new PopupWithForm("#change-avatar", (data) => {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      changeAvatarPopup.renderLoading(false);
     });
 });
 
@@ -205,52 +210,38 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 const editForm = new PopupWithForm("#edit", (data) => {
-  // Show a loading indicator while the API request is being made
-  // editForm.renderLoading(true);
+  editForm.renderLoading(true);
 
-  // Call the updateUserInfo method of the api instance
   api
     .updateUserInfo(data.name, data.subtitle)
     .then((updatedUserData) => {
-      // Update the user info on the page with the new data
       userInfo.setUserInfo(updatedUserData.name, updatedUserData.about);
-
-      // Close the edit form
       editForm.close();
     })
     .catch((err) => {
-      console.error(err); // Log the error to the console
+      console.error(err);
+    })
+    .finally(() => {
+      editForm.renderLoading(false);
     });
-  // .finally(() => {
-  //   // Hide the loading indicator after the API request is complete
-  //   editForm.renderLoading(false);
-  // });
 });
 
 const addForm = new PopupWithForm("#add", (data) => {
-  // Show a loading indicator while the API request is being made
-  // addForm.renderLoading(true);
+  addForm.renderLoading(true);
 
-  // Call the addCard method of the api instance
   api
     .addCard(data.title, data.link)
     .then((createdCardData) => {
-      // Create a new card using the response data
       const cardElement = createCard(createdCardData);
-
-      // Add the new card to the card section
       cardSection.addItem(cardElement);
-
-      // Close the add form
       addForm.close();
     })
     .catch((err) => {
-      console.error(err); // Log the error to the console
+      console.error(err);
+    })
+    .finally(() => {
+      addForm.renderLoading(false);
     });
-  // .finally(() => {
-  //   // Hide the loading indicator after the API request is complete
-  //   addForm.renderLoading(false);
-  // });
 });
 
 addForm.setEventListeners();

@@ -17,6 +17,41 @@
   margin-right: 30px;
 }
 
+.profile__picture-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profile__overlay {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 105%;
+  height: 105%;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+.profile__edit-icon {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+}
+
+.profile__picture-wrapper:hover .profile__overlay {
+  opacity: 1;
+}
+
+.profile__picture-wrapper:hover .profile__edit-icon {
+  display: block;
+}
+
 .profile__text {
   justify-content: center;
   display: flex;
