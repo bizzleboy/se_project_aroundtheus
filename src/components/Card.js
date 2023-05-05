@@ -1,30 +1,50 @@
 class Card {
-  constructor(
-    data,
-    selector,
-    { handleImageClick, handleDeleteClick },
-    options
-  ) {
+  constructor(data, selector, { handleImageClick }, options) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
     this._popUpElement = selector;
     this._handleImageClick = handleImageClick;
-    this._handleDeleteClick = handleDeleteClick;
     this._cardId = data._id;
     this._ownerId = data.owner._id;
     this._api = options.api;
+    this._userId = options.userId;
+    this._deleteForm = options.deleteForm;
+    this._deleteCardPopup = options.deleteCardPopup;
+  }
+
+  _handleDeleteClickInternal(element, cardId) {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      this._api
+        .deleteCard(cardId)
+        .then(() => {
+          element.remove();
+          this._deleteCardPopup.close();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          this._deleteForm.removeEventListener("submit", handleSubmit);
+        });
+    };
+
+    this._deleteForm.removeEventListener("submit", handleSubmit);
+    this._deleteForm.addEventListener("submit", handleSubmit);
+
+    this._deleteCardPopup.open();
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", this._handleLikeIcon.bind(this));
-    //this._deleteButton.addEventListener("click", this._deleteCard.bind(this));
+
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick(this._name, this._link)
     );
 
     this._deleteButton.addEventListener("click", () =>
-      this._handleDeleteClick(this._element, this._cardId)
+      this._handleDeleteClickInternal(this._element, this._cardId)
     );
   }
 
@@ -60,6 +80,7 @@ class Card {
     cardElement.querySelector(".card__like-count").textContent = this._likes;
     return cardElement;
   }
+
   async getElement() {
     this._element = this._getTemplate();
 
@@ -67,18 +88,10 @@ class Card {
     this._deleteButton = this._element.querySelector(".card__delete");
     this._cardImage = this._element.querySelector(".card__image");
 
-    // Conditionally show the delete button
-    // if (22 !== this._cardId) {
-    //   this._deleteButton.style.display = "none";
-    // }
-
-    try {
-      const userInfo = await this._api.getUserInfo();
-      if (userInfo._id !== this._ownerId) {
-        this._deleteButton.style.display = "none";
-      }
-    } catch (error) {
-      console.error(error);
+    if (this._userId !== this._ownerId) {
+      this._deleteButton.style.display = "none";
+    } else {
+      this._deleteButton.style.display = "block";
     }
 
     this._setEventListeners();

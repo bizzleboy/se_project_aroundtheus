@@ -37,6 +37,24 @@ api
     console.error(err);
   });
 
+async function initApp() {
+  try {
+    const userInfo = await api.getUserInfo();
+    userId = userInfo._id;
+
+    console.log(userId); // Now, it should log the correct userId
+
+    const cards = await api.getInitialCards();
+    for (const card of cards) {
+      await renderCard(card, userId);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+initApp();
+
 /*
 Webpack image import thingys
 ############################################################
@@ -149,9 +167,11 @@ const changeAvatarPopup = new PopupWithForm("#change-avatar", (data) => {
   api
     .updateAvatar(data.avatar)
     .then((result) => {
+      console.log("Result from updateAvatar:", result); // Add this line
       profilePicture.src = result.avatar;
       changeAvatarPopup.close();
     })
+
     .catch((err) => {
       console.error(err);
     })
@@ -259,7 +279,7 @@ deleteCardPopup.setEventListeners();
 const imagePreview = new PopupWithImage("#preview");
 imagePreview.setEventListeners();
 
-function createCard(data) {
+function createCard(data, userId) {
   return new Card(
     data,
     cardSelector,
@@ -267,43 +287,25 @@ function createCard(data) {
       handleImageClick: (name, link) => {
         imagePreview.open(name, link);
       },
-      handleDeleteClick: (element, cardId) => {
-        // Remove existing event listener before adding a new one
-        const handleSubmit = (e) => {
-          e.preventDefault();
-          api
-            .deleteCard(cardId)
-            .then(() => {
-              element.remove();
-              deleteCardPopup.close();
-            })
-            .catch((err) => {
-              console.error(err);
-            })
-            .finally(() => {
-              deleteForm.removeEventListener("submit", handleSubmit);
-            });
-        };
-
-        deleteForm.removeEventListener("submit", handleSubmit);
-        deleteForm.addEventListener("submit", handleSubmit);
-
-        deleteCardPopup.open();
-      },
     },
-    { api: api }
+    {
+      api: api,
+      userId: userId,
+      deleteForm: deleteForm,
+      deleteCardPopup: deleteCardPopup,
+    }
   ).getElement();
 }
 
-async function renderCard(item) {
-  const cardElement = await createCard(item);
+async function renderCard(item, id) {
+  const cardElement = await createCard(item, id);
   cardSection.addItem(cardElement);
 }
 
 const cardSection = new Section(
   {
     items: [],
-    renderer: renderCard,
+    renderer: (item) => renderCard(item, userId),
   },
   ".cards"
 );
@@ -312,11 +314,11 @@ api
   .getInitialCards()
   .then(async (cards) => {
     for (const card of cards) {
-      await renderCard(card);
+      await renderCard(card, userId);
     }
   })
   .catch((err) => {
-    console.error(err); // log the error to the console
+    console.error(err);
   });
 
 cardSection.renderItems();

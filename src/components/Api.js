@@ -7,25 +7,13 @@ export default class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleResponse);
   }
 
   updateUserInfo(name, about) {
@@ -36,15 +24,8 @@ export default class Api {
         name: name,
         about: about,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleResponse);
   }
-
-  // Inside Api class in Api.js
 
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -54,12 +35,7 @@ export default class Api {
         name: name,
         link: link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._handleResponse);
   }
 
   _handleResponse(res) {
@@ -97,6 +73,6 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatarUrl,
       }),
-    }).then(this._checkResponse);
+    }).then(this._handleResponse);
   }
 }
