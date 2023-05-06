@@ -272,7 +272,17 @@ editForm.setEventListeners();
 
 const deleteForm = document.querySelector("#delete-form");
 
-const deleteCardPopup = new PopupWithForm("#delete", (data) => {});
+const deleteCardPopup = new PopupWithForm("#delete", () => {
+  api
+    .deleteCard(deleteCardPopup.cardId)
+    .then(() => {
+      deleteCardPopup.cardElement.remove();
+      deleteCardPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
 
 deleteCardPopup.setEventListeners();
 
@@ -289,11 +299,16 @@ function createCard(data, userId) {
       },
     },
     {
-      api: api,
-      userId: userId,
-      deleteForm: deleteForm,
-      deleteCardPopup: deleteCardPopup,
-    }
+      handleDeleteCard: (cardElement, cardId) => {
+        deleteCardPopup.cardElement = cardElement; // Store the card element
+        deleteCardPopup.cardId = cardId; // Store the card ID
+        deleteCardPopup.open(); // Open the delete confirmation popup
+      },
+      handleLikeToggle: (cardId, isLiked) => {
+        return isLiked ? api.removeLike(cardId) : api.addLike(cardId);
+      },
+    },
+    userId
   ).getElement();
 }
 

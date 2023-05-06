@@ -1,60 +1,39 @@
 class Card {
-  constructor(data, selector, { handleImageClick }, options) {
+  constructor(
+    data,
+    selector,
+    { handleImageClick },
+    { handleDeleteCard, handleLikeToggle },
+    userId
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
     this._popUpElement = selector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleLikeToggle = handleLikeToggle;
     this._cardId = data._id;
     this._ownerId = data.owner._id;
-    this._api = options.api;
-    this._userId = options.userId;
-    this._deleteForm = options.deleteForm;
-    this._deleteCardPopup = options.deleteCardPopup;
-  }
-
-  _handleDeleteClickInternal(element, cardId) {
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      this._api
-        .deleteCard(cardId)
-        .then(() => {
-          element.remove();
-          this._deleteCardPopup.close();
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .finally(() => {
-          this._deleteForm.removeEventListener("submit", handleSubmit);
-        });
-    };
-
-    this._deleteForm.removeEventListener("submit", handleSubmit);
-    this._deleteForm.addEventListener("submit", handleSubmit);
-
-    this._deleteCardPopup.open();
+    this._userId = userId;
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener("click", this._handleLikeIcon.bind(this));
+    this._likeButton.addEventListener("click", () => this._handleLikeIcon());
 
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick(this._name, this._link)
     );
 
     this._deleteButton.addEventListener("click", () =>
-      this._handleDeleteClickInternal(this._element, this._cardId)
+      this._handleDeleteCard(this._element, this._cardId)
     );
   }
 
   _handleLikeIcon() {
     const isLiked = this._likeButton.classList.contains("card__like-active");
 
-    (isLiked
-      ? this._api.removeLike(this._cardId)
-      : this._api.addLike(this._cardId)
-    )
+    this._handleLikeToggle(this._cardId, isLiked)
       .then((updatedCard) => {
         this._likes = updatedCard.likes.length;
         this._element.querySelector(".card__like-count").textContent =
