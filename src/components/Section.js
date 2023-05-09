@@ -13,6 +13,5 @@ export default class Section {
 
   addItem(element) {
     this._container.prepend(element);
-    this._container.offsetHeight; // Add this line to force a reflow
   }
 }

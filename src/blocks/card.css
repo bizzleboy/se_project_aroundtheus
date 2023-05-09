@@ -9,7 +9,7 @@
 }
 
 .card__image {
-  object-fit: contain;
+  object-fit: cover;
   width: 282px;
   height: 282px;
   align-self: flex-start;

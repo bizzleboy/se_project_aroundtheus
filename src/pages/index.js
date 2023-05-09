@@ -10,8 +10,28 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api";
 
 import "../pages/index.css";
+import { config, cardSelector, selectors } from "../utils/constants.js";
 
-import closeDelete from "../images/CloseIcon.svg";
+/*
+                      Constants
+############################################################
+*/
+
+const profileAddForm = document.getElementById(selectors.profileAddForm);
+const profileEditForm = document.getElementById(selectors.profileEditForm);
+const openProfileEditorButton = document.querySelector(
+  selectors.openProfileEditorButton
+);
+const addButton = document.querySelector(selectors.addButton);
+const jobInputField = document.getElementById(selectors.jobInputField);
+const nameInputField = document.getElementById(selectors.nameInputField);
+//const logoImage = document.querySelector(".header__logo");
+const logoImage = document.getElementById(selectors.logoImage);
+const profilePicture = document.getElementById(selectors.profilePicture);
+
+const closePreview = document.getElementById(selectors.closePreview);
+const closeEdit = document.getElementById(selectors.closeEdit);
+const closeAdd = document.getElementById(selectors.closeAdd);
 
 /*
 API STUFF
@@ -28,21 +48,30 @@ const api = new Api({
 });
 
 let userId; // Declare the variable at the top level
-api
-  .getUserInfo()
-  .then((data) => {
-    userId = data._id; // Store the user ID
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+
+const userInfo = new UserInfo({
+  userName: ".profile__name",
+  userJob: ".profile__subtitle",
+  userAvatar: "#profpic",
+});
+
+const cardSection = new Section(
+  {
+    items: [],
+    renderer: (item) => renderCard(item, userId),
+  },
+  ".cards"
+);
 
 async function initApp() {
   try {
-    const userInfo = await api.getUserInfo();
-    userId = userInfo._id;
-
-    console.log(userId); // Now, it should log the correct userId
+    const userInfoData = await api.getUserInfo();
+    userId = userInfoData._id;
+    userInfo.setUserInfo(
+      userInfoData.name,
+      userInfoData.about,
+      userInfoData.avatar
+    );
 
     const cards = await api.getInitialCards();
     for (const card of cards) {
@@ -63,20 +92,14 @@ import logo from "../images/aroundUS.svg";
 // import avatarImage from "../images/jacques-cousteau.jpg";
 import close from "../images/CloseIcon.svg";
 
-const logoImage = document.getElementById("logo");
-
 logoImage.src = logo;
 
-const profilePicture = document.getElementById("profpic");
 // profilePicture.src = avatarImage;
 
-const closePreview = document.getElementById("preview-close");
 closePreview.src = close;
 
-const closeEdit = document.getElementById("edit-close");
 closeEdit.src = close;
 
-const closeAdd = document.getElementById("add-close");
 closeAdd.src = close;
 
 /*
@@ -89,8 +112,6 @@ import bald from "../images/bald-mountains.png";
 import latemar from "../images/latemar.png";
 import nat from "../images/vanoise-national-park.png";
 import lago from "../images/lago-di-braies.png";
-
-//console.log(api);
 
 const card1 = {
   name: "Yosemite Valley",
@@ -124,39 +145,6 @@ const card6 = {
 const initialCards = [card1, card2, card3, card4, card5, card6];
 
 /*
-                      POPUPS
-############################################################
-*/
-
-const profileAddForm = document.querySelector("#add-form");
-
-const profileEditForm = document.querySelector("#edit-form");
-
-/*
-                      BUTTONS
-############################################################
-*/
-
-const openProfileEditorButton = document.querySelector(".profile__edit");
-
-const addButton = document.querySelector(".profile__add");
-
-/*
-                      INPUTS
-############################################################
-*/
-
-const jobInputField = document.querySelector("#subtitle");
-
-const nameInputField = document.querySelector(".modal__input");
-
-/*
-                      Template
-############################################################
-*/
-
-const cardSelector = "#card__template";
-/*
                       FUNCTIONS
 ############################################################
 */
@@ -167,11 +155,9 @@ const changeAvatarPopup = new PopupWithForm("#change-avatar", (data) => {
   api
     .updateAvatar(data.avatar)
     .then((result) => {
-      console.log("Result from updateAvatar:", result); // Add this line
-      profilePicture.src = result.avatar;
+      userInfo.setAvatar(result.avatar);
       changeAvatarPopup.close();
     })
-
     .catch((err) => {
       console.error(err);
     })
@@ -182,19 +168,13 @@ const changeAvatarPopup = new PopupWithForm("#change-avatar", (data) => {
 
 changeAvatarPopup.setEventListeners();
 
-const userInfo = new UserInfo({
-  userName: ".profile__name",
-  userJob: ".profile__subtitle",
-});
-
 api
   .getUserInfo()
   .then((result) => {
-    userInfo.setUserInfo(result.name, result.about);
-    profilePicture.src = result.avatar;
+    userInfo.setUserInfo(result.name, result.about, result.avatar);
   })
   .catch((err) => {
-    console.error(err); // log the error to the console
+    console.error(err);
   });
 
 function fillProfileForm() {
@@ -203,16 +183,6 @@ function fillProfileForm() {
   nameInputField.setAttribute("value", name);
   jobInputField.setAttribute("value", job);
 }
-
-const config = {
-  invalidInput: "modal__input-invalid",
-  activateError: "form__input-error_active",
-  formTypeError: "form__input_type_error",
-  inactiveButton: "modal__button-inactive",
-  modalInput: ".modal__input",
-  modalButton: ".modal__button",
-  modalForm: ".modal__form",
-};
 
 const avatarForm = document.querySelector("#avatar-form");
 
@@ -253,7 +223,7 @@ const addForm = new PopupWithForm("#add", (data) => {
   api
     .addCard(data.title, data.link)
     .then((createdCardData) => {
-      return createCard(createdCardData); // Return the promise here
+      return createCard(createdCardData, userId); // Return the promise here
     })
     .then((cardElement) => {
       cardSection.addItem(cardElement); // Add the card to the DOM after the image has been preloaded
@@ -316,27 +286,6 @@ async function renderCard(item, id) {
   const cardElement = await createCard(item, id);
   cardSection.addItem(cardElement);
 }
-
-const cardSection = new Section(
-  {
-    items: [],
-    renderer: (item) => renderCard(item, userId),
-  },
-  ".cards"
-);
-
-api
-  .getInitialCards()
-  .then(async (cards) => {
-    for (const card of cards) {
-      await renderCard(card, userId);
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
-cardSection.renderItems();
 
 //Open popup event listener
 openProfileEditorButton.addEventListener("click", () => {

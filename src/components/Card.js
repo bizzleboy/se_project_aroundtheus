@@ -16,6 +16,8 @@ class Card {
     this._cardId = data._id;
     this._ownerId = data.owner._id;
     this._userId = userId;
+
+    this._isLikedByCurrentUser = data.likes.some((like) => like._id === userId);
   }
 
   _setEventListeners() {
@@ -71,6 +73,12 @@ class Card {
       this._deleteButton.style.display = "none";
     } else {
       this._deleteButton.style.display = "block";
+    }
+
+    if (this._isLikedByCurrentUser) {
+      this._likeButton.classList.add("card__like-active");
+    } else {
+      this._likeButton.classList.remove("card__like-active");
     }
 
     this._setEventListeners();
