@@ -168,15 +168,6 @@ const changeAvatarPopup = new PopupWithForm("#change-avatar", (data) => {
 
 changeAvatarPopup.setEventListeners();
 
-api
-  .getUserInfo()
-  .then((result) => {
-    userInfo.setUserInfo(result.name, result.about, result.avatar);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
 function fillProfileForm() {
   const { name, job } = userInfo.getUserInfo();
 
@@ -206,7 +197,13 @@ const editForm = new PopupWithForm("#edit", (data) => {
   api
     .updateUserInfo(data.name, data.subtitle)
     .then((updatedUserData) => {
-      userInfo.setUserInfo(updatedUserData.name, updatedUserData.about);
+      console.log(data.avatar);
+      console.log(updatedUserData.avatar);
+      userInfo.setUserInfo(
+        updatedUserData.name,
+        updatedUserData.about,
+        updatedUserData.avatar
+      );
       editForm.close();
     })
     .catch((err) => {
