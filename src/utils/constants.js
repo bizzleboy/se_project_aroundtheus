@@ -22,4 +22,5 @@ export const selectors = {
   closePreview: "preview-close",
   closeEdit: "edit-close",
   closeAdd: "add-close",
+  closeDelete: "delete-close",
 };

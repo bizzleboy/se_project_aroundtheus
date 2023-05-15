@@ -110,19 +110,22 @@
         </div>
 
         <div class="modal modal_type_delete" id="delete">
+          <img
+            class="modal__delete-close"
+            src="<%=require('./images/CloseIcon.svg')%>"
+          />
           <div class="modal__content">
+            <button
+              class="modal__close"
+              id="delete-close"
+              type="button"
+            ></button>
             <h2 class="modal__title">Are you sure?</h2>
             <form class="modal__form" id="delete-form">
               <button class="modal__button modal__button_delete" type="submit">
                 Yes
               </button>
             </form>
-            <button
-              class="modal__close"
-              id="delete-close"
-              type="button"
-              src="./images/CloseIcon.svg"
-            ></button>
           </div>
         </div>
 
@@ -130,7 +133,6 @@
           <div class="modal__preview">
             <button
               type="button"
-              src="./images/CloseIcon.svg"
               class="modal__close"
               id="preview-close"
             ></button>

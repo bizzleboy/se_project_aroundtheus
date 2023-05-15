@@ -32,6 +32,7 @@ const profilePicture = document.getElementById(selectors.profilePicture);
 const closePreview = document.getElementById(selectors.closePreview);
 const closeEdit = document.getElementById(selectors.closeEdit);
 const closeAdd = document.getElementById(selectors.closeAdd);
+const closeDelete = document.getElementById(selectors.closeDelete);
 
 /*
 API STUFF
@@ -101,6 +102,8 @@ closePreview.src = close;
 closeEdit.src = close;
 
 closeAdd.src = close;
+
+closeDelete.src = close;
 
 /*
 Cards

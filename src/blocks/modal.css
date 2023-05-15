@@ -36,6 +36,13 @@
   opacity: 1;
   transition: visibility 0.5s, opacity 0.5s linear;
 }
+
+.modal__delete-close {
+  height: 40px;
+  width: 40px;
+  margin-left: 460px;
+}
+
 .modal__close {
   width: 40px;
   height: 40px;
@@ -102,7 +109,7 @@
 }
 
 .modal__input {
-  padding-right: 175px;
+  padding-right: 195px;
   border-left-width: 0px;
   border-right-width: 0px;
   border-top-width: 0px;
